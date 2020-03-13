@@ -26,6 +26,11 @@ export default new Router({
           component: require('@/components/map/2DMap').default
         },
         {
+          path: '3dmap',
+          name: '3d-map',
+          component: require('@/components/threeMap/index').default
+        },
+        {
           path: 'charts',
           name: 'charts',
           component: require('@/components/charts/index').default

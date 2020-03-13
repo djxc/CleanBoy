@@ -3699,6 +3699,13 @@ center-align@^0.1.1:
     align-text "^0.1.3"
     lazy-cache "^1.0.3"
 
+cesium@^1.67.0:
+  version "1.67.0"
+  resolved "https://registry.npm.taobao.org/cesium/download/cesium-1.67.0.tgz#da12638513f3a0678e2b52466cd65330e339e2f2"
+  integrity sha1-2hJjhRPzoGeOK1JGbNZTMOM54vI=
+  dependencies:
+    esm "^3.2.25"
+
 cfonts@^2.1.2:
   version "2.8.0"
   resolved "https://registry.npm.taobao.org/cfonts/download/cfonts-2.8.0.tgz#ffdb7042654f769f2397367def786a018495cd78"
@@ -5697,6 +5704,11 @@ eslint@^4.19.1:
     strip-json-comments "~2.0.1"
     table "4.0.2"
     text-table "~0.2.0"
+
+esm@^3.2.25:
+  version "3.2.25"
+  resolved "https://registry.npm.taobao.org/esm/download/esm-3.2.25.tgz#342c18c29d56157688ba5ce31f8431fbb795cc10"
+  integrity sha1-NCwYwp1WFXaIulzjH4Qx+7eVzBA=
 
 espree@^3.5.4:
   version "3.5.4"
