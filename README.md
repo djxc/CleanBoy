@@ -10,3 +10,4 @@
 * 8、采用mapbox-gl-draw库，实现要素编辑。提供create、update以及delete事件，在事件回调函数中可以获取feature对象。
 * 9、通过turf.js库进行空间分析，计算面积、缓冲区分析。需要输入geojson格式的数据，这里将mapbox创建的要素进行组织生成turf.js需要的格式。
 * 10、引入cesium组件显示三维场景。有两种方法导入cesium：源码导入、build文件导入。这里采用的build文件导入，修改的地方较少。之前在react引用cesium属于源码导入。
+* 11、采用js库jimp创建缩略图，可以使用该库对图片进行操作。
