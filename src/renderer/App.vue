@@ -9,7 +9,6 @@ export default {
   name: 'my-electron-project'
 }
 </script>
-
 <style>
 /* CSS */
 </style>

@@ -4,7 +4,8 @@ var path = require('path')
 var ExifImage = require('exif').ExifImage;
 
 /**
- * 遍历文件夹下所有的照片文件，然后将其解析出经纬度，保存在文件中
+ * ### 解析照片的GPS数据
+ * 1、遍历文件夹下所有的照片文件，然后将其解析出经纬度，保存在文件中
  * 这里采用async语法将函数变成异步函数，可以在异步函数中使用await。
  * await后的函数是一种耗时操作的函数，通过使用await关键字等待执行完该耗时操作，然后继续执行下面的语句。
  * await需要在async方法内部
@@ -12,6 +13,7 @@ var ExifImage = require('exif').ExifImage;
  * @param {string} saveFilePath GPS文件保存位置
  */
 async function testGPS(photosFolder, saveFilePath, callback) {
+
     let files = fs.readdirSync(photosFolder);
     // 同步打开文件，防止回调陷阱
     let fd = fs.openSync(saveFilePath, 'w')

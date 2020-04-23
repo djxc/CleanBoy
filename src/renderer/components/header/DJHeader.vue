@@ -5,13 +5,17 @@
       <button class="main-header-goback" @click="goBack()">返回</button>
       <!-- 下拉菜单 -->
       <el-dropdown @command="handleCommand">
-        <el-button size="small" class="toolbox">
+        <button class="header-toolbox">
           工具箱
           <i class="el-icon-arrow-down el-icon--right"></i>
-        </el-button>
+        </button>
+        <!-- <el-button size="small" class="toolbox">
+          工具箱
+        </el-button>-->
         <el-dropdown-menu slot="dropdown">
           <el-dropdown-item command="gps">提取照片GPS</el-dropdown-item>
           <el-dropdown-item command="thumbnail">创建缩略图</el-dropdown-item>
+          <el-dropdown-item command="saveWebMap">web地图保存</el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
 
@@ -28,6 +32,7 @@
         @change="getGPSFromPhotos()"
       />
     </div>
+
     <!-- 解析照片GPS对话框 -->
     <el-dialog
       title="解析照片GPS数据"
@@ -46,10 +51,12 @@
         </el-form-item>
       </el-form>
       <span slot="footer" class="dialog-footer">
-        <el-button size="small" @click="dialogGPSVisible = false">取 消</el-button>
-        <el-button size="small" type="primary" @click="dialogGPSVisible = false">确 定</el-button>
+        <el-button size="small" @click="parseGPSFromPhotos('close')">取 消</el-button>
+        <el-button size="small" type="primary" @click="parseGPSFromPhotos('parseGPS')">确 定</el-button>
       </span>
     </el-dialog>
+
+    <!-- 创建缩略图对话框 -->
     <el-dialog
       title="创建缩略图"
       :visible.sync="thumbnailVisible"
@@ -127,7 +134,13 @@ export default {
     getGPSFromPhotos() {
       this.photosFolder = this.openFile.files[0].path
     },
-    // 向主进程请求事件，携带参数
+    /**
+     * ### 解析照片中的经纬度
+     * 1、通过输入的`type`判断关闭解析GPS对话框，还是向主线程发送解析GPS请求
+     * 2、如果`type`为close则关闭该对话框，如果`parseGPS`则向主线程发送解析GPS事件，
+     * 参数为照片的地址文件夹，保存的坐标文件位置。
+     * @param type 类型：关闭、解析GPS
+     */
     parseGPSFromPhotos(type) {
       switch (type) {
         case 'parseGPS':
@@ -144,17 +157,22 @@ export default {
           break
       }
     },
-    // 处理下拉菜单的点击事件
+    /**
+     * ### 下拉菜单按钮
+     */
     handleCommand(command) {
       switch (command) {
         case 'gps':
-          console.log('gps')
           this.dialogGPSVisible = true
           break
         case 'thumbnail':
           // this.thumbnailVisible = true
           ipcRenderer.send('create_thumbnail')
           console.log('thumbnail')
+          break
+        case 'saveWebMap':
+          console.log('saveWebMap')
+          ipcRenderer.send('save_webMap')
           break
         default:
           break
@@ -182,15 +200,15 @@ export default {
 }
 .main-header-user {
   float: right;
-  line-height: 6vmin;
+  line-height: 5.8vmin;
   margin-right: 1vmin;
 }
 
 .main-header-goback {
   background-color: white;
   border: none;
-  border-radius: 0.2em;
-  padding: 2px;
+  border-radius: 0.1em;
+  padding: 3px;
   margin: auto 1vmin auto 1vmin;
 }
 .main-header-goback:hover {
@@ -215,6 +233,15 @@ export default {
 
 .el-icon-document:hover,
 .el-icon-folder:hover {
+  cursor: pointer;
+}
+.header-toolbox {
+  border: none;
+  background-color: white;
+  padding: 3px;
+  border-radius: 0.1em;
+}
+.header-toolbox:hover {
   cursor: pointer;
 }
 </style>

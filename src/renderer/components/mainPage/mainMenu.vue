@@ -15,7 +15,9 @@
       <div class="main-body-menu1-item">
         <img src="~@/assets/charts.jpg" title="报表工具" @click="goto2DMap('/main/charts')" />
       </div>
-      <div class="main-body-menu1-item"></div>
+      <div class="main-body-menu1-item">
+        <img src="~@/assets/canvas1.jpg" title="canvas" @click="goto2DMap('/main/dxmap')" />
+      </div>
     </div>
     <div class="main-body-menu2">
       <div class="main-body-menu2-item"></div>

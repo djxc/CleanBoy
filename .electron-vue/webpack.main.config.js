@@ -38,9 +38,6 @@ let mainConfig = {
         use: 'node-loader'
       }
     ],
-	// *******************************
-    unknownContextRegExp: /^.\/.*$/,
-    unknownContextCritical: false
   },
   node: {
     __dirname: process.env.NODE_ENV !== 'production',
@@ -49,10 +46,7 @@ let mainConfig = {
   output: {
     filename: '[name].js',
     libraryTarget: 'commonjs2',
-    path: path.join(__dirname, '../dist/electron'),
-    // ******************************
-    sourcePrefix: ' '
-    // ******************************
+    path: path.join(__dirname, '../dist/electron')
   },
   plugins: [
     new webpack.NoEmitOnErrorsPlugin()

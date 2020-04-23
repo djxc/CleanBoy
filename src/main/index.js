@@ -3,6 +3,7 @@
 import { app, BrowserWindow, dialog } from 'electron'
 import testGPS from './util/showGPS'
 import CreateThumbnail from './util/createThumbnail'
+import saveIMG from './util/saveIMG'
 const { ipcMain } = require('electron')
 
 /**
@@ -34,6 +35,8 @@ function createWindow() {
   // 去除原生顶部菜单栏
   mainWindow.setMenu(null)
   mainWindow.loadURL(winURL)
+  // 加载开发者工具，可以打包之后也可以打开调试界面
+  mainWindow.openDevTools()
 
   mainWindow.on('closed', () => {
     mainWindow = null
@@ -44,7 +47,10 @@ function createWindow() {
       event.sender.send('parseGPS', state) // 将事件处理结果在以另一个响应返给渲染进程
     })
   })
-  // 保存文件的对话框
+
+  /**
+   * **打开保存文件对话框**
+   */
   ipcMain.on('save-file', (event, arg) => {
     dialog.showSaveDialog(mainWindow, {
       filters: [{ name: '文本文件', extensions: ['txt'] }]
@@ -52,6 +58,11 @@ function createWindow() {
       event.sender.send('save-GPS-file', fileName) // 将事件处理结果在以另一个响应返给渲染进程
       console.log(fileName)
     })
+  })
+
+  ipcMain.on('save_webMap', (event, arg) => {
+    console.log('保存webMap地图')
+    saveIMG()
   })
 
   // 创建缩略图

@@ -11,3 +11,5 @@
 * 9、通过turf.js库进行空间分析，计算面积、缓冲区分析。需要输入geojson格式的数据，这里将mapbox创建的要素进行组织生成turf.js需要的格式。
 * 10、引入cesium组件显示三维场景。有两种方法导入cesium：源码导入、build文件导入。这里采用的build文件导入，修改的地方较少。之前在react引用cesium属于源码导入。
 * 11、采用js库jimp创建缩略图，可以使用该库对图片进行操作。
+* 12、Ineffective mark-compacts near heap limit Allocation failed - JavaScript heap out of memory。出现内存不够，需要在package.json:添加 "build": "node --max_old_space_size=4096 .electron-vue/build.js && electron-builder",
+* 13、采用nodejs的request发送请求，获取天地图或是谷歌地图切片，需要设置请求的头数据，不然服务器不能正常响应该请求。

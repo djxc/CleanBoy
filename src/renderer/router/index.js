@@ -34,6 +34,11 @@ export default new Router({
           path: 'charts',
           name: 'charts',
           component: require('@/components/charts/index').default
+        },
+        {
+          path: 'dxmap',
+          name: 'dxmap',
+          component: require('@/components/DXMap/index').default
         }
       ]
     }

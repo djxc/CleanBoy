@@ -22,13 +22,16 @@ export default {
 
 <style>
 .main-body {
-  height: 90vmin;
+  height: 94vmin;
   /* background-color: rgb(39, 37, 35); */
 }
 
 .main-footer {
   height: 4vmin;
-  background-color: rgb(50, 51, 50);
+  position: absolute;
+  width: 100%;
+  bottom: 0%;
+  background-color: rgba(50, 51, 50, 0.6);
   color: aquamarine;
 }
 </style>
