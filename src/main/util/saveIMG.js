@@ -7,7 +7,10 @@
 var Jimp = require('jimp')
 const request = require("request");
 const fs = require("fs");
+// import mergeImages from 'merge-images';
+// const {Canvas, Image} = require('canvas');
 import { cache_img_save_path } from '../config'
+
 
 /**
  * ### 爬取天地图的切片数据
@@ -47,21 +50,24 @@ function megeIMG() {
     let cache_x = 3420;
     let cache_y = 1605;
     let cache_z = 12;
-    for (let x = 0; x < 10; x++) {
+    let images = []
+    for (let x = 0; x < 5; x++) {
         cache_x++;
-        for (let y = 0; y < 10; y++) {
+        for (let y = 0; y < 5; y++) {
             cache_y++
             let imgFile = cache_img_save_path + "/"
                 + cache_x + "_" + cache_y + "_" + cache_z + ".png"
-            fs.exists(imgFile, (exists) => {
-                if (exists) {
-                    console.log('yes')
-                } else {
-                    console.log('no')
-                }
-            })
+            images.push(imgFile)
         }
     }
+    // mergeImages(images, {
+    //     Canvas: Canvas,
+    //     Image: Image
+    // }).then(b64=>{
+    //     let fd = fs.openSync("D:\\test.png", 'w')
+    //     fs.writeSync(fd, b64)
+    //     fs.closeSync(fd)
+    // })
 }
 
 export default saveIMG

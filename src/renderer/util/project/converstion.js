@@ -1,6 +1,7 @@
+/* eslint-disable */
 /**
  * **计算坐标与切片之间关系**
- * @param {*} val 
+ * @param {*} val
  */
 
 function calcTile(val) {
@@ -45,3 +46,4 @@ function tile2lat(y, z) {
     var n = Math.PI - (2 * Math.PI * y) / Math.pow(2, z)
     return (180 / Math.PI) * Math.atan(0.5 * (Math.exp(n) - Math.exp(-n)))
 }
+/* eslint-disable */
