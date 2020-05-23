@@ -39,6 +39,11 @@ export default new Router({
           path: 'dxmap',
           name: 'dxmap',
           component: require('@/components/DXMap/index').default
+        },
+        {
+          path: 'dthree',
+          name: 'dthree',
+          component: require('@/components/DThree/DThree').default
         }
       ]
     }

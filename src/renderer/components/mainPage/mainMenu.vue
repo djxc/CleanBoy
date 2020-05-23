@@ -20,7 +20,7 @@
       </div>
     </div>
     <div class="main-body-menu2">
-      <div class="main-body-menu2-item"></div>
+      <div class="main-body-menu2-item" title="web三维" @click="goto2DMap('/main/dthree')"></div>
       <div class="main-body-menu2-item"></div>
       <div class="main-body-menu2-item"></div>
       <div class="main-body-menu2-item"></div>

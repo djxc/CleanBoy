@@ -68,6 +68,7 @@
     "jimp": "^0.9.6",
     "mapbox-gl": "^1.8.1",
     "merge-images": "^2.0.0",
+    "three": "^0.116.1",
     "ts-loader": "^6.2.2",
     "tslint": "^6.1.1",
     "tslint-config-standard": "^9.0.0",
