@@ -10,17 +10,37 @@
         />
       </div>
       <div class="main-body-menu1-item">
-        <img src="~@/assets/3dEarth.jpg" title="三维地图" @click="goto2DMap('/main/3dmap')" />
+        <img
+          src="~@/assets/3dEarth.jpg"
+          title="三维地图"
+          @click="goto2DMap('/main/3dmap')"
+        />
       </div>
       <div class="main-body-menu1-item">
-        <img src="~@/assets/charts.jpg" title="报表工具" @click="goto2DMap('/main/charts')" />
+        <img
+          src="~@/assets/charts.jpg"
+          title="报表工具"
+          @click="goto2DMap('/main/charts')"
+        />
       </div>
       <div class="main-body-menu1-item">
-        <img src="~@/assets/canvas1.jpg" title="canvas" @click="goto2DMap('/main/dxmap')" />
+        <img
+          src="~@/assets/canvas1.jpg"
+          title="canvas"
+          @click="goto2DMap('/main/dxmap')"
+        />
       </div>
     </div>
     <div class="main-body-menu2">
-      <div class="main-body-menu2-item" title="web三维" @click="goto2DMap('/main/dthree')"></div>
+      <div
+        class="main-body-menu2-item"
+        title="web三维"
+        @click="goto2DMap('/main/dthree')"
+      >
+        <img
+          src="~@/assets/three.jpeg"
+          title="三维空间"
+        /></div>
       <div class="main-body-menu2-item"></div>
       <div class="main-body-menu2-item"></div>
       <div class="main-body-menu2-item"></div>

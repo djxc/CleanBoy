@@ -1,3 +1,7 @@
+/**
+ * **cesium创建三维几何体**
+ */
+
 import * as Cesium from 'cesium/Cesium'
 
 /**
@@ -46,5 +50,36 @@ function createEntity(lng: number, lat: number, alt: number,
     return entity
 }
 
+/**
+ * **创建点要素**
+ * @param name 名称
+ * @param lat 纬度
+ * @param lon 经度
+ * @param size 大小
+ * @param color 颜色
+ */
+function createPoint(name: string, lat: number, lon: number,
+    size: number, color: string) {
+    let newPoint = new Cesium.Entity({
+        name: name,
+        position: Cesium.Cartesian3.fromDegrees(lat, lon),
+        point: {
+            pixelSize: 5,
+            color: Cesium.Color.RED,
+            outlineColor: Cesium.Color.WHITE,
+            outlineWidth: 2
+        },
+        label: {
+            text: name,
+            font: '14pt monospace',
+            style: Cesium.LabelStyle.FILL_AND_OUTLINE,
+            outlineWidth: 2,
+            verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
+            pixelOffset: new Cesium.Cartesian2(0, -9)
+        }
+    })
+    return newPoint;
+}
 
-export { createPosition, createEntity }
+
+export { createPosition, createEntity, createPoint }

@@ -1,5 +1,8 @@
 <template>
-  <div class="mapcontainer" id="basicMapbox">
+  <div
+    class="mapcontainer"
+    id="basicMapbox"
+  >
     <div class="map2-menu">
       <ul>
         <li>编辑</li>
@@ -32,7 +35,8 @@ export default {
         // 类型为栅格瓦片
         type: 'raster',
         tiles: [
-          'http://t4.tianditu.com/DataServer?T=img_w&x={x}&y={y}&l={z}&tk=b9d6abed32f12b4094773fc6985b9ea3'
+          // 'http://t4.tianditu.com/DataServer?T=img_w&x={x}&y={y}&l={z}&tk=b9d6abed32f12b4094773fc6985b9ea3'
+        'http://10.249.7.251:11111/tileIMGCache/GF2_20180419/{z}/{x}/{y}.png'
         ],
         // 分辨率
         tileSize: 256
@@ -91,7 +95,7 @@ export default {
           ]
         },
         center: [120.517, 36.156],
-        zoom: 16
+        zoom: 10
       })
       // 使用定位模块
       this.map.addControl(

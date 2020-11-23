@@ -5,18 +5,41 @@
     <div class="main-body">
       <router-view></router-view>
     </div>
-    <div class="main-footer">footer</div>
+    <div class="main-footer">
+      <span>
+        {{this.lon_x}}
+        &nbsp;&nbsp;
+        {{this.lat_y }}
+      </span>
+    </div>
   </div>
 </template>
 
 <script>
+import { mapState } from 'vuex'
 import DJHeader from '../header/DJHeader.vue'
 export default {
   name: 'mainPage',
   components: {
     DJHeader
   },
-  methods: {}
+  data: () => {
+    return {}
+  },
+  mounted() {
+    this.init()
+  },
+  methods: {
+    init() {
+      console.log(this.lon_x)
+    }
+  },
+  computed: {
+    ...mapState({
+      lon_x: state => state.Counter.lon_x,
+      lat_y: state => state.Counter.lat_y
+    })
+  }
 }
 </script>
 
