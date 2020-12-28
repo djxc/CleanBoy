@@ -1,21 +1,25 @@
+
+<!--
+@FileDescription 登录界面
+@Author small dj
+@Date 2020-12-12
+@LastEditor small dj
+@LastEditTime 2020-12-12 18:21 
+ -->
 <template>
   <div id="wrapper">
     <img id="logo" src="~@/assets/cat.jpg" alt="electron-vue">
     <main>
       <div class="left-side">
         <span class="title">
-          这是我的js桌面系统
+          利用js编写的桌面系统
         </span>
-        <system-information></system-information>
-      </div>
-
-      <div class="right-side">
+        <!-- <system-information></system-information> -->
         <div class="doc">
-          <div class="title">进军</div>
           <p>
             通过electron+vue+element构建桌面系统
           </p>
-          <button @click="sayHello()">进入系统</button><br><br>
+          <button @click="login()">进入系统</button><br><br>
         </div>
         <div class="doc">
           <div class="title alt">交互按钮</div>
@@ -23,12 +27,15 @@
           <button class="alt" @click="sayHello()">Hello World</button>
         </div>
       </div>
+
+      <div class="right-side">
+      </div>
     </main>
   </div>
 </template>
 
 <script>
-  import SystemInformation from './LandingPage/SystemInformation'
+  import SystemInformation from '@/components/LandingPage/SystemInformation'
 
   export default {
     name: 'landing-page',
@@ -37,11 +44,14 @@
       open (link) {
         this.$electron.shell.openExternal(link)
       },
+      sayHello() {
+        alert('欢迎')
+      },
       test () {
         console.log(process)
       },
       // 页面跳转
-      sayHello () {
+      login () {
         this.$router.push({path: '/main'})
       }
     }

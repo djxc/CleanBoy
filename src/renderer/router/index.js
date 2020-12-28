@@ -5,15 +5,16 @@ Vue.use(Router)
 
 export default new Router({
   routes: [
+    // 初始化界面
     {
       path: '/',
       name: 'landing-page',
-      component: require('@/components/LandingPage').default
+      component: require('@/view/LandingPage').default
     },
     {
       path: '/main',
       name: 'main-page',
-      component: require('@/components/mainPage/mainPage').default,
+      component: require('@/view/mainPage').default,
       children: [
         {
           path: '/',
@@ -44,6 +45,21 @@ export default new Router({
           path: 'dthree',
           name: 'dthree',
           component: require('@/components/DThree/DThree').default
+        },
+        {
+          path: 'dwebgl',
+          name: 'dwebgl',
+          component: require('@/view/DJWebGL').default
+        },
+        {
+          path: 'dwebassembly',
+          name: 'dwebassembly',
+          component: require('@/view/DWebAssembly').default
+        },
+        {
+          path: 'onlineTile',
+          name: 'onlineTile',
+          component: require('@/view/onlineTile').default
         }
       ]
     }

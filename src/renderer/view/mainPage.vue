@@ -1,3 +1,12 @@
+<!--
+@FileDescription 程序主界面
+1、提供程序头部工具栏以及底部状态栏
+2、提供路由跳转
+@Author small dj
+@Date 2020-12-12
+@LastEditor small dj
+@LastEditTime 2020-12-12 18:30
+-->
 <template>
   <!-- 程序的主界面 -->
   <div>
@@ -5,12 +14,12 @@
     <div class="main-body">
       <router-view></router-view>
     </div>
-    <div class="main-footer">footer</div>
+    <div class="main-footer">尔识真理，真理释尔。</div>
   </div>
 </template>
 
 <script>
-import DJHeader from '../header/DJHeader.vue'
+import DJHeader from '@/components/header/DJHeader.vue'
 export default {
   name: 'mainPage',
   components: {

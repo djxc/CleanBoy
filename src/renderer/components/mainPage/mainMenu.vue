@@ -10,10 +10,16 @@
         />
       </div>
       <div class="main-body-menu1-item">
-        <img src="~@/assets/3dEarth.jpg" title="三维地图" @click="goto2DMap('/main/3dmap')" />
+        <img
+          src="~@/assets/3dEarth.jpg"
+          title="三维地图"
+          @click="goto2DMap('/main/3dmap')" />
       </div>
       <div class="main-body-menu1-item">
-        <img src="~@/assets/charts.jpg" title="报表工具" @click="goto2DMap('/main/charts')" />
+        <img 
+          src="~@/assets/charts.jpg" 
+          title="报表工具"
+          @click="goto2DMap('/main/charts')" />
       </div>
       <div class="main-body-menu1-item">
         <img src="~@/assets/canvas1.jpg" title="canvas" @click="goto2DMap('/main/dxmap')" />
@@ -21,9 +27,13 @@
     </div>
     <div class="main-body-menu2">
       <div class="main-body-menu2-item" title="web三维" @click="goto2DMap('/main/dthree')"></div>
-      <div class="main-body-menu2-item"></div>
-      <div class="main-body-menu2-item"></div>
-      <div class="main-body-menu2-item"></div>
+      <div class="main-body-menu2-item" title="webassamble">
+        <img src="~@/assets/webassembly.jpg"/>
+      </div>
+      <div class="main-body-menu2-item" title="webGL" @click="goto2DMap('/main/dwebgl')"></div>
+      <div class="main-body-menu2-item" title="onlineTile" @click="goto2DMap('/main/onlineTile')">
+        <img src="~@/assets/onlineTile.png"/>
+      </div>
     </div>
     <div class="main-body-menu3">
       <div class="main-body-menu3-item"></div>
@@ -69,7 +79,7 @@ export default {
 }
 
 .main-body-menu1-item img {
-  /* width: 100%; */
+  /* width: 10vmax; */
   height: 100%;
   margin: 0 auto;
   border-radius: 0.8em;
