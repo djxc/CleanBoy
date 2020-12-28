@@ -4,6 +4,7 @@ import { app, BrowserWindow, dialog } from 'electron'
 import testGPS from './util/showGPS'
 import CreateThumbnail from './util/createThumbnail'
 import saveIMG from './util/saveIMG'
+import '../renderer/store'
 const { ipcMain } = require('electron')
 
 /**

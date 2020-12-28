@@ -28,7 +28,7 @@ class CreateEntity {
         let plane = new THREE.Mesh(planeGeometry, planeMaterial)
         plane.rotation.x = -0.5 * Math.PI
         plane.position.x = 2
-        plane.position.y = 0
+        plane.position.y = -2
         plane.position.z = 0
         plane.receiveShadow = true
         return plane
@@ -39,9 +39,21 @@ class CreateEntity {
         lineGeometry.vertices.push(new THREE.Vector3(-1, -2, -3))
         lineGeometry.vertices.push(new THREE.Vector3(1, 2, -3))
         lineGeometry.vertices.push(new THREE.Vector3(2, 0, 2))
-        let lineMaterial = new THREE.LineBasicMaterial({ color: "green" })
+        let lineMaterial = new THREE.LineBasicMaterial({ color: 0x0000ff })
         let line = new THREE.Mesh(lineGeometry, lineMaterial)
         return line
+    }
+
+    createText(text: string) {
+        // let textGeometry = new THREE.TextGeometry(text, {
+        //     font: undefined,
+        //     size: 70,
+        //     height: 20,
+        //     curveSegments: 4,
+        //     bevelThickness: 2,
+        //     bevelSize: 1.5,
+        //     bevelEnabled: true
+        // })
     }
 }
 
