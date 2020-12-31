@@ -14,27 +14,20 @@
     <div class="main-body">
       <router-view></router-view>
     </div>
-<<<<<<< HEAD:src/renderer/view/mainPage.vue
-    <div class="main-footer">尔识真理，真理释尔。</div>
-=======
     <div class="main-footer">
+      尔识真理，真理释尔。
       <span>
         {{this.lon_x}}
         &nbsp;&nbsp;
         {{this.lat_y }}
       </span>
     </div>
->>>>>>> 7b409ec23e1e65cf8eb729008e0b53802a69d259:src/renderer/components/mainPage/mainPage.vue
   </div>
 </template>
 
 <script>
-<<<<<<< HEAD:src/renderer/view/mainPage.vue
-import DJHeader from '@/components/header/DJHeader.vue'
-=======
 import { mapState } from 'vuex'
-import DJHeader from '../header/DJHeader.vue'
->>>>>>> 7b409ec23e1e65cf8eb729008e0b53802a69d259:src/renderer/components/mainPage/mainPage.vue
+import DJHeader from '@/components/header/DJHeader.vue'
 export default {
   name: 'mainPage',
   components: {

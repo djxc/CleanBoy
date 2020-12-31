@@ -59,7 +59,7 @@ export default new Router({
         {
           path: 'onlineTile',
           name: 'onlineTile',
-          component: require('@/view/onlineTile').default
+          component: require('@/view/OnlineTile').default
         }
       ]
     }
