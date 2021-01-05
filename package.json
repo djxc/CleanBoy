@@ -58,7 +58,7 @@
   "dependencies": {
     "@mapbox/mapbox-gl-draw": "^1.1.2",
     "@turf/turf": "^5.1.6",
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "cesium": "^1.67.0",
     "echarts": "^4.6.0",
     "echarts-gl": "^1.1.1",

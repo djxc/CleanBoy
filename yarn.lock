@@ -465,7 +465,7 @@
     vfile "^4.0.0"
     vfile-reporter "^5.1.1"
 
-"@mapbox/jsonlint-lines-primitives@^2.0.2":
+"@mapbox/jsonlint-lines-primitives@^2.0.2", "@mapbox/jsonlint-lines-primitives@~2.0.2":
   version "2.0.2"
   resolved "https://registry.npm.taobao.org/@mapbox/jsonlint-lines-primitives/download/@mapbox/jsonlint-lines-primitives-2.0.2.tgz#ce56e539f83552b58d10d672ea4d6fc9adc7b234"
   integrity sha1-zlblOfg1UrWNENZy6k1vya3HsjQ=
@@ -483,6 +483,20 @@
     hat "0.0.3"
     lodash.isequal "^4.2.0"
     xtend "^4.0.1"
+
+"@mapbox/mapbox-gl-style-spec@^13.14.0":
+  version "13.18.1"
+  resolved "https://registry.yarnpkg.com/@mapbox/mapbox-gl-style-spec/-/mapbox-gl-style-spec-13.18.1.tgz#9b8a75da9d77716b880d3de927bbea6041b6ad87"
+  integrity sha512-By+CufXEpba7sIUfnpbtVzy5tqrCyFDNssq1k7psxzCL1Xr0y916OSkEH0j7fFilhalVExjoh/mYtxH32tOYqw==
+  dependencies:
+    "@mapbox/jsonlint-lines-primitives" "~2.0.2"
+    "@mapbox/point-geometry" "^0.1.0"
+    "@mapbox/unitbezier" "^0.0.0"
+    csscolorparser "~1.0.2"
+    json-stringify-pretty-compact "^2.0.0"
+    minimist "^1.2.5"
+    rw "^1.3.3"
+    sort-object "^0.3.2"
 
 "@mapbox/mapbox-gl-supported@^1.4.0":
   version "1.5.0"
@@ -2454,13 +2468,12 @@ axios@^0.15.3:
   dependencies:
     follow-redirects "1.0.0"
 
-axios@^0.18.0:
-  version "0.18.1"
-  resolved "https://registry.npm.taobao.org/axios/download/axios-0.18.1.tgz#ff3f0de2e7b5d180e757ad98000f1081b87bcea3"
-  integrity sha1-/z8N4ue10YDnV62YAA8Qgbh7zqM=
+axios@^0.21.1:
+  version "0.21.1"
+  resolved "https://registry.yarnpkg.com/axios/-/axios-0.21.1.tgz#22563481962f4d6bde9a76d516ef0e5d3c09b2b8"
+  integrity sha512-dKQiRHxGD9PPRIUNIWvZhPTPpl1rf/OxTYKsqKUDjBwYylTvV7SjSHJb9ratfyzM6wCdLCOYLzs73qpg5c4iGA==
   dependencies:
-    follow-redirects "1.5.10"
-    is-buffer "^2.0.2"
+    follow-redirects "^1.10.0"
 
 babel-code-frame@^6.22.0, babel-code-frame@^6.26.0:
   version "6.26.0"
@@ -5042,7 +5055,7 @@ debug@2, debug@2.6.9, debug@^2.1.3, debug@^2.2, debug@^2.2.0, debug@^2.3.3, debu
   dependencies:
     ms "2.0.0"
 
-debug@3.1.0, debug@=3.1.0, debug@~3.1.0:
+debug@3.1.0, debug@~3.1.0:
   version "3.1.0"
   resolved "https://registry.npm.taobao.org/debug/download/debug-3.1.0.tgz#5bb5a0672628b64149566ba16819e61518c67261"
   integrity sha1-W7WgZyYotkFJVmuhaBnmFRjGcmE=
@@ -6635,19 +6648,10 @@ follow-redirects@1.0.0:
   dependencies:
     debug "^2.2.0"
 
-follow-redirects@1.5.10:
-  version "1.5.10"
-  resolved "https://registry.npm.taobao.org/follow-redirects/download/follow-redirects-1.5.10.tgz?cache=0&sync_timestamp=1580082894575&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Ffollow-redirects%2Fdownload%2Ffollow-redirects-1.5.10.tgz#7b7a9f9aea2fdff36786a94ff643ed07f4ff5e2a"
-  integrity sha1-e3qfmuov3/NnhqlP9kPtB/T/Xio=
-  dependencies:
-    debug "=3.1.0"
-
-follow-redirects@^1.0.0:
-  version "1.10.0"
-  resolved "https://registry.npm.taobao.org/follow-redirects/download/follow-redirects-1.10.0.tgz?cache=0&sync_timestamp=1580082894575&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Ffollow-redirects%2Fdownload%2Ffollow-redirects-1.10.0.tgz#01f5263aee921c6a54fb91667f08f4155ce169eb"
-  integrity sha1-AfUmOu6SHGpU+5Fmfwj0FVzhaes=
-  dependencies:
-    debug "^3.0.0"
+follow-redirects@^1.0.0, follow-redirects@^1.10.0:
+  version "1.13.1"
+  resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.13.1.tgz#5f69b813376cee4fd0474a3aba835df04ab763b7"
+  integrity sha512-SSG5xmZh1mkPGyKzjZP8zLjltIfpW32Y5QpdNJyjcfGxK3qo3NDDkZOZSFiGn1A6SclQxY9GzEwAHQ3dmYRWpg==
 
 for-in@^1.0.1, for-in@^1.0.2:
   version "1.0.2"
@@ -7852,7 +7856,7 @@ is-buffer@^1.0.2, is-buffer@^1.1.5:
   resolved "https://registry.npm.taobao.org/is-buffer/download/is-buffer-1.1.6.tgz#efaa2ea9daa0d7ab2ea13a97b2b8ad51fefbe8be"
   integrity sha1-76ouqdqg16suoTqXsritUf776L4=
 
-is-buffer@^2.0.0, is-buffer@^2.0.2:
+is-buffer@^2.0.0:
   version "2.0.4"
   resolved "https://registry.npm.taobao.org/is-buffer/download/is-buffer-2.0.4.tgz#3e572f23c8411a5cfd9557c849e3665e0b290623"
   integrity sha1-PlcvI8hBGlz9lVfISeNmXgspBiM=
@@ -8380,6 +8384,11 @@ json-stable-stringify-without-jsonify@^1.0.1:
   version "1.0.1"
   resolved "https://registry.npm.taobao.org/json-stable-stringify-without-jsonify/download/json-stable-stringify-without-jsonify-1.0.1.tgz#9db7b59496ad3f3cfef30a75142d2d930ad72651"
   integrity sha1-nbe1lJatPzz+8wp1FC0tkwrXJlE=
+
+json-stringify-pretty-compact@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/json-stringify-pretty-compact/-/json-stringify-pretty-compact-2.0.0.tgz#e77c419f52ff00c45a31f07f4c820c2433143885"
+  integrity sha512-WRitRfs6BGq4q8gTgOy4ek7iPFXjbra0H3PmDLKm2xnZ+Gh1HUhiKGgCZkSPNULlP7mvfu6FV/mOLhCarspADQ==
 
 json-stringify-safe@5.0.x, json-stringify-safe@~5.0.1:
   version "5.0.1"
@@ -9176,6 +9185,11 @@ mapbox-gl@^1.8.1:
     supercluster "^7.0.0"
     tinyqueue "^2.0.0"
     vt-pbf "^3.1.1"
+
+mapbox-to-css-font@^2.4.0:
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/mapbox-to-css-font/-/mapbox-to-css-font-2.4.0.tgz#a23b51664a1ee839beaefade013f2655bee9a390"
+  integrity sha512-v674D0WtpxCXlA6E+sBlG1QJWdUkz/s9qAD91bJSXBGuBL5lL4tJXpoJEftecphCh2SVQCjWMS2vhylc3AIQTg==
 
 math-expression-evaluator@^1.2.14:
   version "1.2.22"
@@ -10041,6 +10055,24 @@ obuf@^1.0.0, obuf@^1.1.2:
   resolved "https://registry.npm.taobao.org/obuf/download/obuf-1.1.2.tgz#09bea3343d41859ebd446292d11c9d4db619084e"
   integrity sha1-Cb6jND1BhZ69RGKS0RydTbYZCE4=
 
+ol-mapbox-style@^6.1.1:
+  version "6.3.0"
+  resolved "https://registry.yarnpkg.com/ol-mapbox-style/-/ol-mapbox-style-6.3.0.tgz#615bbbc3a4b4cb712666185ac22dcbd912b045c7"
+  integrity sha512-oRMP5nTEHvF8OoH0sofXElJGi1RV84H27M67nbb2AKcElGag/Z9a6FoI15+J/LSxsg5E1IOW4pIHi0w5ZOUIVg==
+  dependencies:
+    "@mapbox/mapbox-gl-style-spec" "^13.14.0"
+    mapbox-to-css-font "^2.4.0"
+    webfont-matcher "^1.1.0"
+
+ol@^6.4.3:
+  version "6.5.0"
+  resolved "https://registry.yarnpkg.com/ol/-/ol-6.5.0.tgz#d9cd59081ac34dc4caf0509c3f667748a8207a21"
+  integrity sha512-a5ebahrjF5yCPFle1rc0aHzKp/9A4LlUnjh+S3I+x4EgcvcddDhpOX3WDOs0Pg9/wEElrikHSGEvbeej2Hh4Ug==
+  dependencies:
+    ol-mapbox-style "^6.1.1"
+    pbf "3.2.1"
+    rbush "^3.0.1"
+
 omggif@^1.0.9:
   version "1.0.10"
   resolved "https://registry.npm.taobao.org/omggif/download/omggif-1.0.10.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fomggif%2Fdownload%2Fomggif-1.0.10.tgz#ddaaf90d4a42f532e9e7cb3a95ecdd47f17c7b19"
@@ -10478,7 +10510,7 @@ pathval@^1.1.0:
   resolved "https://registry.npm.taobao.org/pathval/download/pathval-1.1.0.tgz#b942e6d4bde653005ef6b71361def8727d0645e0"
   integrity sha1-uULm1L3mUwBe9rcTYd74cn0GReA=
 
-pbf@^3.0.5, pbf@^3.2.1:
+pbf@3.2.1, pbf@^3.0.5, pbf@^3.2.1:
   version "3.2.1"
   resolved "https://registry.npm.taobao.org/pbf/download/pbf-3.2.1.tgz#b4c1b9e72af966cd82c6531691115cc0409ffe2a"
   integrity sha1-tMG55yr5Zs2CxlMWkRFcwECf/io=
@@ -11216,7 +11248,7 @@ raw-body@^2.2.0:
     iconv-lite "0.4.24"
     unpipe "1.0.0"
 
-rbush@*:
+rbush@*, rbush@^3.0.1:
   version "3.0.1"
   resolved "https://registry.npm.taobao.org/rbush/download/rbush-3.0.1.tgz#5fafa8a79b3b9afdfe5008403a720cc1de882ecf"
   integrity sha1-X6+op5s7mv3+UAhAOnIMwd6ILs8=
@@ -12283,12 +12315,30 @@ socks@~2.3.2:
     ip "1.1.5"
     smart-buffer "^4.1.0"
 
+sort-asc@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/sort-asc/-/sort-asc-0.1.0.tgz#ab799df61fc73ea0956c79c4b531ed1e9e7727e9"
+  integrity sha1-q3md9h/HPqCVbHnEtTHtHp53J+k=
+
+sort-desc@^0.1.1:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/sort-desc/-/sort-desc-0.1.1.tgz#198b8c0cdeb095c463341861e3925d4ee359a9ee"
+  integrity sha1-GYuMDN6wlcRjNBhh45JdTuNZqe4=
+
 sort-keys@^1.0.0:
   version "1.1.2"
   resolved "https://registry.npm.taobao.org/sort-keys/download/sort-keys-1.1.2.tgz#441b6d4d346798f1b4e49e8920adfba0e543f9ad"
   integrity sha1-RBttTTRnmPG05J6JIK37oOVD+a0=
   dependencies:
     is-plain-obj "^1.0.0"
+
+sort-object@^0.3.2:
+  version "0.3.2"
+  resolved "https://registry.yarnpkg.com/sort-object/-/sort-object-0.3.2.tgz#98e0d199ede40e07c61a84403c61d6c3b290f9e2"
+  integrity sha1-mODRme3kDgfGGoRAPGHWw7KQ+eI=
+  dependencies:
+    sort-asc "^0.1.0"
+    sort-desc "^0.1.1"
 
 source-list-map@^2.0.0:
   version "2.0.1"
@@ -13782,6 +13832,11 @@ webdriverio@^4.8.0:
     url "~0.11.0"
     wdio-dot-reporter "~0.0.8"
     wgxpath "~1.0.0"
+
+webfont-matcher@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/webfont-matcher/-/webfont-matcher-1.1.0.tgz#98ce95097b29e31fbe733053e10e571642d1c6c7"
+  integrity sha1-mM6VCXsp4x++czBT4Q5XFkLRxsc=
 
 webpack-cli@^3.0.8:
   version "3.3.11"
