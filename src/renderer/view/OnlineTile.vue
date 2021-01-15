@@ -25,6 +25,7 @@ export default {
     this.initMap()
   },
   methods: {
+
     /**
      * **初始化地图对象**
      */
@@ -52,10 +53,15 @@ export default {
           })
         ],
         view: new View({
-          projection: 'EPSG:4326',
+          // projection: 'EPSG:4326',
           center: [0, 0],
           zoom: 19
         })
+      })
+      this.map.on('pointermove', (evt) => {
+        let disX = evt.coordinate[0]
+        let disY = evt.coordinate[1]
+        console.log(disX, disY)
       })
     }
   }
