@@ -33,15 +33,15 @@ export default {
   },
   methods: {
     init() {
-      console.log(this.lon_x)
+      console.log(this)
     }
-  },
-  computed: {
-    ...mapState({
-      lon_x: state => state.Counter.lon_x,
-      lat_y: state => state.Counter.lat_y
-    })
   }
+  // computed: {
+  //   ...mapState({
+  //     lon_x: state => state.Counter.lon_x,
+  //     lat_y: state => state.Counter.lat_y
+  //   })
+  // }
 }
 </script>
 
