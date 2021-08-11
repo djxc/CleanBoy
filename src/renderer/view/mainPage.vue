@@ -14,14 +14,7 @@
     <div class="main-body">
       <router-view></router-view>
     </div>
-    <div class="main-footer">
-      尔识真理，真理释尔。
-      <span>
-        {{this.lon_x}}
-        &nbsp;&nbsp;
-        {{this.lat_y }}
-      </span>
-    </div>
+    <div class="main-footer">尔识真理，真理释尔。</div>
   </div>
 </template>
 
@@ -41,7 +34,7 @@ export default {
   },
   methods: {
     init() {
-      console.log(this.lon_x)
+      console.log(this)
     }
   },
   computed: {
