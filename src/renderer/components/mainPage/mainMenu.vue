@@ -13,13 +13,15 @@
         <img
           src="~@/assets/3dEarth.jpg"
           title="三维地图"
-          @click="goto2DMap('/main/3dmap')" />
+          @click="goto2DMap('/main/3dmap')"
+        />
       </div>
       <div class="main-body-menu1-item">
-        <img 
-          src="~@/assets/charts.jpg" 
+        <img
+          src="~@/assets/charts.jpg"
           title="报表工具"
-          @click="goto2DMap('/main/charts')" />
+          @click="goto2DMap('/main/charts')"
+        />
       </div>
       <div class="main-body-menu1-item">
         <img
