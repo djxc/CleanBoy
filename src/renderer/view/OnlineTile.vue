@@ -36,7 +36,7 @@ export default {
           new TileLayer({
             // source: new OSM()
             source: new XYZ({
-              url: 'http://localhost:3001/onlineTile/test/{z}/{x}/{-y}.png',
+              url: 'http://localhost:3001/onlineTile/test/japan_origin.tif/{z}/{x}/{-y}.png',
               tileLoadFunction: (imageTile, src) => {
                 fetch(src, {
                   method: 'GET'
@@ -53,9 +53,10 @@ export default {
           })
         ],
         view: new View({
-          // projection: 'EPSG:4326',
-          center: [0, 0],
-          zoom: 19
+          // projection: 'EPSG:4326'
+          center: [15705221.56783892, 5055844.764097785],
+          // center: [0, 0],
+          zoom: 18
         })
       })
       this.map.on('pointermove', (evt) => {

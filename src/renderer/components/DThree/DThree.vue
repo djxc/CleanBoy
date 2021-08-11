@@ -34,7 +34,7 @@ export default Vue.extend({
         1,
         2000
       ),
-      renderer: new THREE.WebGLRenderer({ antialias: true }),
+      renderer: new THREE.WebGLRenderer({ antialias: true, alpha: true }),
       cube: new THREE.Mesh(),
       cameraX: 3,
       cameraY: 10,
@@ -65,7 +65,7 @@ export default Vue.extend({
       this.camera.position.set(this.cameraX, this.cameraY, this.cameraY)
       this.renderer.setPixelRatio(window.devicePixelRatio)
       this.renderer.setSize(window.innerWidth, window.innerHeight * 0.94)
-
+      this.renderer.setClearAlpha(0.5)
       let threeContainer = document.getElementById('threediv')
       if (threeContainer) {
         threeContainer.appendChild(this.renderer.domElement)
@@ -155,7 +155,10 @@ export default Vue.extend({
 #threediv {
   width: 100vw;
   height: 94vh;
-  background-color: blueviolet;
+  overflow: hidden; /* 溢出隐藏 */
+  background: url('../../assets/three_background.jpg') center no-repeat;
+  -webkit-background-size: cover;
+  background-size: cover;
 }
 .three-menu-title {
   margin-top: 1vh;
