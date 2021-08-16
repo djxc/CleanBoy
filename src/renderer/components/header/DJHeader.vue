@@ -1,6 +1,6 @@
 <template>
   <div class="main-header">
-    <div class="main-header-logo">清洁软件</div>
+    <div class="main-header-logo">CleanBoy</div>
     <div class="main-header-user">
       <button class="main-header-goback" @click="goBack()">返回</button>
       <!-- 下拉菜单 -->

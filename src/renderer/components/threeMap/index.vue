@@ -6,7 +6,7 @@
         class="el-menu-vertical-demo"
         text-color="#fff"
         active-text-color="#ffd04b"
-        background-color="rgba(0, 0, 0, 0.6)"
+        background-color="rgba(7, 57, 167, 0.6)"
         :collapse="openMenu"
       >
         <el-menu-item
@@ -94,7 +94,8 @@ export default {
       // 增加谷歌影像底图
       this.viewer.imageryLayers.addImageryProvider(
         new Cesium.UrlTemplateImageryProvider({
-          url: 'http://www.google.cn/maps/vt?lyrs=s&x={x}&y={y}&z={z}',
+          // url: 'http://www.google.cn/maps/vt?lyrs=s&x={x}&y={y}&z={z}',
+          url: "http://t4.tianditu.com/DataServer?T=img_w&x={x}&y={y}&l={z}&tk=b9d6abed32f12b4094773fc6985b9ea3",
           tilingScheme: new Cesium.WebMercatorTilingScheme()
         })
       )
@@ -193,6 +194,6 @@ export default {
 
 .el-menu-vertical-demo {
   height: 65vh;
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: rgba(7, 57, 167, 0.6);
 }
 </style>

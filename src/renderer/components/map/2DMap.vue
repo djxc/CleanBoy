@@ -35,8 +35,8 @@ export default {
         // 类型为栅格瓦片
         type: 'raster',
         tiles: [
-          // 'http://t4.tianditu.com/DataServer?T=img_w&x={x}&y={y}&l={z}&tk=b9d6abed32f12b4094773fc6985b9ea3'
-        'http://10.249.7.251:11111/tileIMGCache/GF2_20180419/{z}/{x}/{y}.png'
+          'http://t4.tianditu.com/DataServer?T=img_w&x={x}&y={y}&l={z}&tk=b9d6abed32f12b4094773fc6985b9ea3'
+        // 'http://10.249.7.251:11111/tileIMGCache/GF2_20180419/{z}/{x}/{y}.png'
         ],
         // 分辨率
         tileSize: 256
