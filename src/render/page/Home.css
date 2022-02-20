@@ -1,0 +1,49 @@
+.main-body-menu {
+    height: 90vh;
+    overflow-y: auto;
+  }
+  .main-body-menu1 {
+    height: 30vmin;
+  }
+  
+  .main-body-menu1-item,
+  .main-body-menu2-item,
+  .main-body-menu3-item {
+    width: 11vw;
+    height: 18vh;
+    float: left;
+    margin-left: 12vmax;
+    margin-top: 7vmin;
+    border-radius: 0.8em;
+    overflow: hidden;
+  }
+  
+  .main-body-menu1-item img:hover,
+  .main-body-menu2-item img:hover,
+  .main-body-menu3-item img:hover {
+    box-shadow: 6px 6px 5px #a1a1a1;
+    cursor: pointer;
+  }
+  
+  .main-body-menu1-item img,
+  .main-body-menu2-item img,
+  .main-body-menu3-item img,
+  .main-body-menu4-item img {
+    width: 10vw;
+    height: 15vh;
+    margin: 0 auto;
+    border-radius: 0.8em;
+  }
+  
+  .main-body-menu2 {
+    height: 30vmin;
+  }
+  .main-body-menu3 {
+    height: 29vmin;
+  }
+  
+  .main-body-menu-title {
+    color: black;
+    text-align: center;
+    margin-left: -1vw;
+  }
