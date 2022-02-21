@@ -1,7 +1,9 @@
+import ChartsComponent from "../../components/chartsComponent/ChartsComponent";
+
 function ChartsPage() {
     return(
         <div>
-           ChartsPage
+           <ChartsComponent/>
         </div>
     )
 }

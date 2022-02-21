@@ -1,7 +1,9 @@
+import MapComponent from "../../components/mapComponent/MapComponent";
+
 function MapPage() {
     return(
         <div>
-           map
+           <MapComponent/>
         </div>
     )
 }

@@ -1,4 +1,5 @@
-import { Route, Routes, useNavigate } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
+import HeaderComponent from "../components/headerComponent/header";
 import CanvasPage from "../page/canvas";
 import ChartsPage from "../page/charts";
 import D3dPage from "../page/d3d";
@@ -10,13 +11,10 @@ import WebAssemblyPage from "../page/webAssembly";
 import WebGLPage from "../page/webGL";
 
 function HomeRouter() {
-    const navigate = useNavigate();
 
     return (
         <div>
-            <div>
-                <button onClick={() => changeMap('/home')}>主页面</button>
-            </div>
+            <HeaderComponent/>
             <Routes>
                 {/* exact 表示url匹配整个path而不是拦截所有以path开头的url */}
                 <Route path='/' element={<HomePage />}>
@@ -43,10 +41,7 @@ function HomeRouter() {
             </div>
         </div>
     )
-
-    function changeMap(path: string) {
-        navigate(path)
-    }
+   
 }
 
 export default HomeRouter
