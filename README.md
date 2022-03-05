@@ -33,3 +33,14 @@
         })
     }
 ```
+
+# 主进程与渲染进程之间的通信
+- 1、这里采用contextBridge进行主进程与渲染进程之间的连接，会更安全。
+- 2、采用contextBridge时可以设置contextIsolation为true，主进程与渲染进程之间的联系利用preload.js文件进行关联。
+- 3、在主进程main.js文件中加载preload.js文件，然后利用ipcMain监听定义的事件。
+- 4、在preload.js文件中引入contextBridge,然后利用exposeInMainWorld函数暴露出api接口，在函数中调用ipcRender.send调用主进程中的函数。
+```js
+    contextBridge.exposeInMainWorld("myAPI", {
+    doAThing: () => {ipcRenderer.send("test_demo")}
+  })
+```

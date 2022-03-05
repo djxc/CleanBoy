@@ -26,12 +26,13 @@ function HeaderComponent() {
         </Menu>
     );
     return (
-        <div>
+        <div className="header-page">
             <div>
 
             </div>
             <div className="header-toolbox">
                 <Avatar icon={<UserOutlined />} />
+                <Button onClick={() => { window.history.back()}}>返回</Button>
                 <Button onClick={() => { changeMap("/home") }}>主页面</Button>
                 <Dropdown overlay={menu} placement="bottomCenter">
                     <Button>工具箱</Button>
