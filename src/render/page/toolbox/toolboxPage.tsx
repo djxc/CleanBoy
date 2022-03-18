@@ -10,14 +10,16 @@ function ToolboxPage() {
     return (
         <div className="toolbox-page">
             <div>常用工具</div>
-            <div className="request-toolbox">
-                <span onClick={()=>{changePage("/home/toolbox/http")}}>http请求测试</span>
-                {/* <DRequest/> */}
+            <div className="request-toolbox" onClick={()=>{changePage("/home/toolbox/http")}}>
+                <span>http请求测试</span>
             </div>
 
-            <div className="request-toolbox">
-                <span onClick={()=>{changePage("/home/toolbox/mqtt")}}>mqtt请求测试</span>
-                {/* <MqttRequest/> */}
+            <div className="request-toolbox" onClick={()=>{changePage("/home/toolbox/mqtt")}}>
+                <span>mqtt请求测试</span>
+            </div>
+
+            <div className="request-toolbox" onClick={()=>{changePage("/home/toolbox/dchart")}}>
+                <span>报表测试</span>
             </div>
         </div>
     )
