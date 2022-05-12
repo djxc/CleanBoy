@@ -3,6 +3,7 @@ const { app, BrowserWindow, ipcMain } = require('electron')
 const { MQClient } = require("./service/mqtt/DMqtt")
 const { DMqttManage } = require("./service/mqtt/DMqttManage");
 const { parseVT } = require('./service/vectorTile/parseVectorTile');
+const { sendMsg } = require('./service/socket/socketRequest');
 
 const dev = true;
 // 如果为开发模式，则GUI为url进行加载渲染
@@ -34,7 +35,19 @@ const createWindow = () => {
   })
 
   MQTT(win.webContents)
-  parseVT()
+  // parseVT()
+  soketRequest()
+}
+
+
+/**
+ * 通过socket发送消息
+ */
+function soketRequest() {
+  ipcMain.on("soketRequest", (evt, args) => {
+    console.log("测试socket", args);
+    sendMsg(args.ip, args.port, args.msg)
+  })
 }
 
 /**

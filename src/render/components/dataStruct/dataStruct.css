@@ -1,0 +1,16 @@
+.right-menu {
+    position: absolute;
+    padding: 5px 8px;
+    height: auto;
+    background-color: rgb(255, 255, 255);
+    border-radius: 0.2em;
+}
+
+
+.right-menu li:hover {
+    cursor: pointer;
+}
+
+#treeDiv {
+    margin-left: 2.5vw;
+}

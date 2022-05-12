@@ -103,19 +103,19 @@ function HomePage() {
                 </div>
                 <div
                     className="main-body-menu3-item"
-                    title="webGL"
-                    onClick={() => changeMap('/home/webGL')}
+                    title="数据结构"
+                    onClick={() => changeMap('/home/datastruct')}
                 >
                     <img src={WebGLImage} />
-                    <div className="main-body-menu-title">webGL</div>
+                    <div className="main-body-menu-title">数据结构</div>
                 </div>
                 <div
                     className="main-body-menu3-item"
                     title="onlineTile"
-                    onClick={() => changeMap('/home/onlineTile')}
+                    onClick={() => changeMap('/home/ol')}
                 >
                     <img src={OnlineTileImage} />
-                    <div className="main-body-menu-title">影像切片</div>
+                    <div className="main-body-menu-title">openlayers</div>
                 </div>
             </div>
         </div>

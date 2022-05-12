@@ -1,0 +1,34 @@
+.websocket-container {
+    height: 90vh;
+    width: 100vw;
+    padding: 10px 15px;
+}
+
+.websocket-url-input {
+    width: 300px;
+    margin-right: 5px;
+}
+
+.websocket-receiver-message {
+    height: 50vh;
+    background-color: burlywood;
+}
+
+.websocket-tosend-message {
+    height: 15vh;
+    margin-top: 2vh;
+    background-color: cadetblue;
+}
+
+.socket-request {
+    padding: 1vw;
+    height: 91vh;
+}
+
+.socket-request-receiver {
+    margin-left: 2vw;
+    width: 90vw;
+    height: 20vh;
+    border-radius: 0.3em;
+    border: solid black 1px;
+}

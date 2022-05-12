@@ -18,8 +18,20 @@ function ToolboxPage() {
                 <span>mqtt请求测试</span>
             </div>
 
+            <div className="request-toolbox" onClick={()=>{changePage("/home/toolbox/websocket")}}>
+                <span>websocket请求测试</span>
+            </div>
+
             <div className="request-toolbox" onClick={()=>{changePage("/home/toolbox/dchart")}}>
                 <span>报表测试</span>
+            </div>
+
+            <div className="request-toolbox" onClick={()=>{changePage("/home/toolbox/parseVectorTile")}}>
+                <span>解析pbf切片文件</span>
+            </div>
+
+            <div className="request-toolbox" onClick={()=>{changePage("/home/toolbox/socket")}}>
+                <span>socket请求</span>
             </div>
         </div>
     )

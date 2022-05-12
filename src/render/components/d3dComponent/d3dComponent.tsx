@@ -55,7 +55,7 @@ function D3dComponent() {
         let createEntity = new CreateEntity()
         let cube = createEntity.createCube()
         let plane = createEntity.createPlane()
-        let boll = createEntity.createSphere()
+        let boll = createEntity.createSphere(2, 3, 1, 2)
         let line = createEntity.createLine()
 
         scene.add(plane)
