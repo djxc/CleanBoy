@@ -1,12 +1,17 @@
-# 利用web技术构建桌面程序 2022-02-20
+# 学习 electron——js 构建桌面应用 vue init simulatedgreg/electron-vue my-electron 
+
+## 启动运行
+- 1、首先安装依赖，yarn
+- 2、运行渲染进行`yarn run start_fnd`
+- 3、运行主进程`yarn run start`
+
+## 利用web技术构建桌面程序 2022-02-20
 - 1、创建项目，`yarn init`,安装electron
 - 2、electron分为两个进程，node后台进程，以及渲染进程，两个进程相互独立。node进程利用`electron .`启动，渲染进程这里采用vite+react，
 - 3、将渲染进程进行打包后，主进程访问打包之后的文件index.html,会出现空白页面，因此需要将react路由改为HashRouter
 - 4、渲染进程打包之后访问不到静态资源，需要修改vite.config.ts添加`base:"./"`即可。
 - 5、程序打包，这里采用了electron-packager依赖，执行`electron-packager ./ appname ./ --platform=win32`即可
 
-
-# 学习 electron——js 构建桌面应用 vue init simulatedgreg/electron-vue my-electron
 
 ### 一、这里采用的技术栈为 electron+vue
 
@@ -44,3 +49,12 @@
     doAThing: () => {ipcRenderer.send("test_demo")}
   })
 ```
+
+## ts中引用js文件
+- 1、在js文件中需要export出需要的函数或对象
+- 2、在js目录下创建同名.d.ts文件，内容为
+```js
+declare var xxx: any;
+export default xxx;
+```
+- 3、在ts中引用js文件名，使用为xxx.yyy

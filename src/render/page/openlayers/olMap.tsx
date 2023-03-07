@@ -12,6 +12,8 @@ import WebGLPointsLayer from "ol/layer/WebGLPoints";
 import "ol/ol.css";
 import "./olMap.css";
 import TileLayer from "ol/layer/Tile";
+import GeoTIFF from 'ol/source/GeoTIFF.js';
+import WebGLTileLayer from 'ol/layer/WebGLTile.js';
 
 import ShipIcon from "../../asset/ship.svg";
 import ShipIcon1 from "../../asset/three.jpeg";
@@ -76,18 +78,30 @@ function OLMap() {
         maxZoom: 20,
       }),
     });
+    const cogSource = new GeoTIFF({
+      sources: [
+        {
+          url: 'http://localhost/TCI.tif',
+        },
+      ],
+    });
+
+    const cogLayer = new WebGLTileLayer({
+      source: cogSource,
+    })
 
     let mapDiv = document.getElementById("olmap");
     if (mapDiv) {
       const map = new Map({
-        layers: [raster, vectorPoint, webGLpointsLayer1],
+        layers: [raster, cogLayer],
         target: mapDiv,
-        view: new View({
-          center: [120.277395891, 36.072437216],
-          maxZoom: 19,
-          zoom: 12,
-          projection: "EPSG:4326",
-        }),
+        view: cogSource.getView()
+        // new View({
+        //   center: [33.54, 16.74],
+        //   maxZoom: 19,
+        //   zoom: 12,
+        //   // projection: "EPSG:4326",
+        // }),
       });
     }
   }, []);

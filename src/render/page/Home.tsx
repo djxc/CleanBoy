@@ -9,6 +9,7 @@ import WebThreeImage from "../asset/webThree.jpeg";
 import WebAssemblyImage from "../asset/webassembly.jpg";
 import WebGLImage from "../asset/webGL.jpeg";
 import OnlineTileImage from "../asset/onlineTile.png";
+import OpenlayerLogo from "../asset/openlayers.png";
 import ToolboxImage from "../asset/toolbox.jpg";
 
 
@@ -114,7 +115,7 @@ function HomePage() {
                     title="onlineTile"
                     onClick={() => changeMap('/home/ol')}
                 >
-                    <img src={OnlineTileImage} />
+                    <img src={OpenlayerLogo} />
                     <div className="main-body-menu-title">openlayers</div>
                 </div>
             </div>
