@@ -58,3 +58,7 @@ declare var xxx: any;
 export default xxx;
 ```
 - 3、在ts中引用js文件名，使用为xxx.yyy
+
+
+## WebGPU使用
+- 1、在electron中使用webGPU需要在启动命令中添加变量`--enable-unsafe-webgpu`

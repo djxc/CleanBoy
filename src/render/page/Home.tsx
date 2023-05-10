@@ -71,11 +71,11 @@ function HomePage() {
                 </div>
                 <div
                     className="main-body-menu2-item"
-                    title="webGL"
+                    title="webGL/webGPU"
                     onClick={() => changeMap('/home/webGL')}
                 >
                     <img src={WebGLImage} />
-                    <div className="main-body-menu-title">webGL</div>
+                    <div className="main-body-menu-title">webGL/webGPU</div>
                 </div>
                 <div
                     className="main-body-menu2-item"

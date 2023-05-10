@@ -5,7 +5,7 @@
   "homepage": "./",
   "main": "./src/main/main.js",
   "scripts": {
-    "start": "electron .",
+    "start": "electron . --enable-unsafe-webgpu",
     "start_fnd": "vite",
     "dev": "node .electron-react/start_dev.js && vite",
     "test": "echo \"Error: no test specified\" && exit 1",
