@@ -1,0 +1,8 @@
+.webgpu-body {
+    height: 91vh;
+    width: 100%;
+}
+
+#webGPUCanvas {
+    border: solid red 1px;
+}

@@ -1,6 +1,4 @@
 import { useNavigate } from "react-router-dom";
-import DRequest from "../../components/toolboxComponent/DRequest"
-import MqttRequest from "../../components/toolboxComponent/MqttRequest"
 import "./toolboxPage.css"
 
 function ToolboxPage() {

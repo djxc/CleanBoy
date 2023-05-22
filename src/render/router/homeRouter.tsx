@@ -9,7 +9,7 @@ import MapPage from "../page/map";
 import Map3DPage from "../page/map3D";
 import OnlineTilePage from "../page/onlineTile";
 import WebAssemblyPage from "../page/webAssembly";
-import WebGLPage from "../page/webGL";
+import WebcgRouter from "./WebcgRouter";
 import ToolboxRouter from "./ToolboxRouter";
 import OLMap from "../page/openlayers/olMap";
 import DataStruct from "../page/dataStruct";
@@ -27,7 +27,7 @@ function HomeRouter() {
         <Route path="/charts" element={<ChartsPage />}></Route>
         <Route path="/canvas" element={<CanvasPage />}></Route>
         <Route path="/onlineTile" element={<OnlineTilePage />}></Route>
-        <Route path="/webGL" element={<WebGLPage />}></Route>
+        <Route path="/webCG/*" element={<WebcgRouter />}></Route>
         <Route path="/webAssembly" element={<WebAssemblyPage />}></Route>
         <Route path="/ol" element={<OLMap />}></Route>
         <Route path="/toolbox/*" element={<ToolboxRouter />}></Route>

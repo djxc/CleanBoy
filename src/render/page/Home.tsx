@@ -72,10 +72,10 @@ function HomePage() {
                 <div
                     className="main-body-menu2-item"
                     title="webGL/webGPU"
-                    onClick={() => changeMap('/home/webGL')}
+                    onClick={() => changeMap('/home/webCG')}
                 >
                     <img src={WebGLImage} />
-                    <div className="main-body-menu-title">webGL/webGPU</div>
+                    <div className="main-body-menu-title">计算机图形学</div>
                 </div>
                 <div
                     className="main-body-menu2-item"

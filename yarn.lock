@@ -539,6 +539,11 @@
     react-refresh "^0.11.0"
     resolve "^1.22.0"
 
+"@webgpu/types@^0.1.32":
+  version "0.1.32"
+  resolved "https://registry.npmmirror.com/@webgpu/types/-/types-0.1.32.tgz#098ba131c16cc59406b6721f612238130b58846c"
+  integrity sha512-H6JRAvRonWxqREjxXMZgQmdgIFPe6mykLgdrHY7EQE7YihMKd/SjtSGilUmMKECVdUMg2IQB9vzaXDiTj1AxZg==
+
 ansi-styles@^3.2.1:
   version "3.2.1"
   resolved "https://registry.npmmirror.com/ansi-styles/-/ansi-styles-3.2.1.tgz#41fbb20243e50b12be0f04b8dedbf07520ce841d"

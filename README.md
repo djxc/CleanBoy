@@ -62,3 +62,5 @@ export default xxx;
 
 ## WebGPU使用
 - 1、在electron中使用webGPU需要在启动命令中添加变量`--enable-unsafe-webgpu`
+
+在tsx文件目录下创建同名.d.ts文件， .d.ts中定义interface，tsx中可以直接使用。

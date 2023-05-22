@@ -8,11 +8,13 @@ import WindSurface from '../../asset/cloudsrain-surface.jpg';
 
 
 import "./webGL.css"
+import { useNavigate } from "react-router-dom";
 
 
 function WebGLPage() {
   const shadersSource = "attribute vec4 vPosition; void main(){	gl_PointSize = 1.0;    gl_Position = vPosition;}";
   const frameSource = "precision mediump float;  void  main()  {      gl_FragColor = vec4( 1.0, 0.0, 0.0, 1.0 );  }";
+  const navigate = useNavigate();
   const [gl, setGL] = useState<any>(null)
   const [uColor, setUColor] = useState<any>(null)
   const [pointX, setPointX] = useState(0)
@@ -22,127 +24,54 @@ function WebGLPage() {
   useEffect(() => {
     // init()
     // showWind()
-    createTrangle()
-    // loadImage()
-    renderGPU()
+    // createTrangle()
+    // // loadImage()
+    // renderGPU()
   }, [])
 
   const NumPoints = 5000;
   return (
-    <div className="webgl-container">
-      <canvas id="gl-canvas" width="512" height="512">
-        Oops ... your browser doesn't support the HTML5 canvas element
-      </canvas>
+      <div className="toolbox-page">
+        <div>计算机图形学</div>
+        <div className="request-toolbox" onClick={()=>{changePage("/home/webCG/webGL")}}>
+            <span>webGL</span>
+        </div>
 
-      <canvas id="gl-canvas1" width="512" height="512">
-        Oops ... your browser doesn't support the HTML5 canvas element
-      </canvas>
+        <div className="request-toolbox" onClick={()=>{changePage("/home/webCG/webGPU")}}>
+            <span>webGPU</span>
+        </div>
 
-      <canvas id="gl-legend" width="250" height="50">
-        Oops ... your browser doesn't support the HTML5 canvas element
-      </canvas>
-      <canvas id="webGPUCanvas" width="512" height="300">
-        Oops ... your browser doesn't support the HTML5 canvas element
-      </canvas>
-      <button onClick={() => reDraw("left")}>left</button>
-      <button onClick={() => reDraw("right")}>right</button>
-      <button onClick={() => reDraw("top")}>top</button>
-      <button onClick={() => reDraw("bottom")}>bottom</button>
-    </div>
+        <div className="request-toolbox" onClick={()=>{changePage("/home/webCG/canvas")}}>
+            <span>canvas</span>
+        </div>
+       
+      </div>
+    // <div className="webgl-container">
+    //   <canvas id="gl-canvas" width="512" height="512">
+    //     Oops ... your browser doesn't support the HTML5 canvas element
+    //   </canvas>
+
+    //   <canvas id="gl-canvas1" width="512" height="512">
+    //     Oops ... your browser doesn't support the HTML5 canvas element
+    //   </canvas>
+
+    //   <canvas id="gl-legend" width="250" height="50">
+    //     Oops ... your browser doesn't support the HTML5 canvas element
+    //   </canvas>
+    //   <canvas id="webGPUCanvas" width="512" height="300">
+    //     Oops ... your browser doesn't support the HTML5 canvas element
+    //   </canvas>
+    //   <button onClick={() => reDraw("left")}>left</button>
+    //   <button onClick={() => reDraw("right")}>right</button>
+    //   <button onClick={() => reDraw("top")}>top</button>
+    //   <button onClick={() => reDraw("bottom")}>bottom</button>
+    // </div>
   )
 
-  /**
-   * webGPU渲染三角形
-   * @returns 
-   */
-  async function renderGPU() {
-    const canvas: any = document.getElementById('webGPUCanvas')
-    let navigator: any = window.navigator
-    if (!navigator.gpu) {
-      alert('你的浏览器不支持 WebGPU 或未开启 WebGPU 支持')
-      return
-    }
-    const adapter = await navigator.gpu.requestAdapter()
-    const device = await adapter.requestDevice()
-  
-    const context = canvas.getContext('webgpu')
-    const presentationFormat = context.getPreferredFormat(adapter)
-    const devicePixelRatio = window.devicePixelRatio || 1;
-    const presentationSize = [
-      canvas.clientWidth * devicePixelRatio,
-      canvas.clientHeight * devicePixelRatio,
-    ]
-    context.configure({
-      device,
-      format: presentationFormat,
-      size: presentationSize
-    })
-  
-    const pipeline = device.createRenderPipeline({
-      vertex: {
-        module: device.createShaderModule({
-          code: `
-          [[stage(vertex)]]
-          fn main([[builtin(vertex_index)]] VertexIndex: u32) 
-            -> [[builtin(position)]] vec4<f32> {
-  
-            var pos = array<vec2<f32>, 3>(
-              vec2<f32>(0.0, 0.5),
-              vec2<f32>(-0.5, -0.5),
-              vec2<f32>(0.5, -0.5)
-            );
-  
-            return vec4<f32>(pos[VertexIndex], 0.0, 1.0);
-          }
-          `
-        }),
-        entryPoint: 'main',
-      },
-      fragment: {
-        module: device.createShaderModule({
-          code: `
-          [[stage(fragment)]]
-          fn main() -> [[location(0)]] vec4<f32> {
-            return vec4<f32>(1.0, 0.2, 0.4, 1.0);
-          }
-          `
-        }),
-        entryPoint: 'main',
-        targets: [
-          {
-            format: presentationFormat
-          }
-        ]
-      },
-      primitive: {
-        topology: 'triangle-list',
-      }
-    })
-  
-    const commandEncoder = device.createCommandEncoder()
-    const textureView = context.getCurrentTexture().createView()
-    const renderPassDescriptor = {
-      colorAttachments: [
-        {
-          view: textureView,
-          loadValue: {
-            r: 0.0,
-            g: 0.0,
-            b: 0.0,
-            a: 1.0
-          },
-          storeOp: 'store'
-        }
-      ]
-    }
-  
-    const passEncoder = commandEncoder.beginRenderPass(renderPassDescriptor)
-    passEncoder.setPipeline(pipeline)
-    passEncoder.draw(3, 1, 0, 0)
-    passEncoder.endPass()
-  
-    device.queue.submit([commandEncoder.finish()])
+  function changePage(pageUrl: string) {
+    navigate(pageUrl)
   }
+
   
 
   function reDraw(type: string) {
