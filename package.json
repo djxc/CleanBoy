@@ -20,8 +20,8 @@
     "@vitejs/plugin-react": "^1.0.7",
     "cfonts": "^2.10.0",
     "chalk": "^5.0.0",
-    "electron": "^17.0.1",
-    "electron-packager": "^15.4.0",
+    "electron": "^25.0.0",
+    "electron-packager": "^17.1.1",
     "typescript": "^4.5.4",
     "vite": "^2.8.0"
   },

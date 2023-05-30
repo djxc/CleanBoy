@@ -5,11 +5,18 @@ import VertexShaderCode from "./wgsl/vertexModule.wgsl?raw"
 
 import TriangleVertexShaderCode from "./wgsl/triangleVertex.wgsl?raw"
 import TriangleFramentShaderCode from "./wgsl/triangleFrament.wgsl?raw"
+import Renderer from './demoWebGPU';
+import DWebGPU from "./DWebGPU"
+import { PerspectiveCamera, Matrix4, Vector3 } from "three"
+
 import "./webgc.css"
 
 function WebGPUComponent() {
     useEffect(() => {
-        renderGPU()
+        // renderTrangle()
+        // demogpu()
+        // renderGPU()
+        testGPU()
     }, [])
     return (
         <div className="webgpu-body">
@@ -19,21 +26,56 @@ function WebGPUComponent() {
         </div>
     )
 
+    async function testGPU() {
+
+        const triangleVertex = new Float32Array([
+            0.0, 1.0, 0.0,
+            -1.0, -1.0, 0.0,
+            1.0, -1.0, 0.0
+        ]);
+
+        // 🎨 Color Vertex Buffer Data
+        const colors = new Float32Array([
+            1.0,
+            0.0,
+            0.0, // 🔴
+            0.0,
+            1.0,
+            0.0, // 🟢
+            0.0,
+            0.0,
+            1.0 // 🔵
+        ]);
+        const triangleMVMatrix = new Matrix4().makeTranslation(-1.5, 0.0, -7.0);
+        const triangleIndex = new Uint32Array([0, 1, 2]);
+        let camera = new PerspectiveCamera(45, document.body.clientWidth / document.body.clientHeight, 0.1, 100);
+        let pMatrix = camera.projectionMatrix;
+        let mxArray = new Float32Array(pMatrix.toArray().concat(triangleMVMatrix.toArray()));
+        let dWebGPU = new DWebGPU()
+        const backgroundColor = [0, 0, 0.5, 1];     // 背景颜色
+        await dWebGPU.config("webGPUCanvas")
+        dWebGPU.initRenderPass(backgroundColor);
+        dWebGPU.initPipeline(); 
+        dWebGPU.initGPUBuffer(triangleVertex, triangleIndex, mxArray);
+        dWebGPU.draw(triangleIndex.length)
+        dWebGPU.present()
+    }
+
     /**
      * 初始化GPU对象
      * 1、首先在浏览器对象中获取navigator，其中包含浏览器的基本信息
      * 2、在navigator对象中获取gpu，如果当前浏览器不支持，则获取为空
      * 3、异步获取gpu适配器，adapter描述了显卡的基本信息
      * 4、异步获取设备，即为显卡的引用。用来操纵显卡，还可以创建数据结构
-     * 5、queue是用来向GPU发送异步任务的
+     * 5、queue是用来向GPU发送异步任务的，queue对象需要在device中获取
      * @returns 
      */
-    async function initialGPU(): Promise<[GPUAdapter, GPUDevice, GPUQueue] | []> {
+    async function initialGPU(): Promise<[GPUAdapter, GPUDevice, GPUQueue]> {
         const navigator: any = window.navigator;
         const gpu: GPU = navigator.gpu;
         if (!gpu) {
             alert('你的浏览器不支持 WebGPU 或未开启 WebGPU 支持')
-            return []
+            throw new Error( 'Your browser seems not support WebGPU!' );
         }
         const adapter = await gpu.requestAdapter()
         if (adapter) {
@@ -41,7 +83,7 @@ function WebGPUComponent() {
             const queue = device.queue;
             return [adapter, device, queue]
         } else {
-            return []
+            throw new Error( 'Your browser seems not support WebGPU!' );
         }
     }
 
@@ -70,17 +112,25 @@ function WebGPUComponent() {
 
     /**
      * webGPU渲染三角形
+     * 1、初始化webGPU获取设备、适配器以及queue
+     * 2、配置上下文，canvas
+     * 3、从WGSL创建着色器
+     * 4、创建piple
+     * 5、创建命令缓冲
+     * 6、通过queue执行命令
      * @returns 
      */
     async function renderGPU() {
         const canvas: any = document.getElementById('webGPUCanvas')
-        const [adapter, device, queue] = await initialGPU()
-        if (!adapter || !device || !queue) {
-            return
-        }
+        const [adapter, device, queue] = await initialGPU()       
 
         // 为了显示渲染的内容，需要有一个载体显示，webGPU采用canvas，wgpu可以用winit窗口。
-        const context = canvas.getContext('webgpu')
+        const context = canvas.getContext('webgpu') as GPUCanvasContext
+        if (context) {
+            console.info( `Congratulations! You've got a WebGPU context!` );
+        } else {
+            throw new Error( 'Your browser seems not support WebGPU!' );
+        }
         const presentationFormat = context.getPreferredFormat(adapter)
         configContext(canvas, context, device, presentationFormat);
 
@@ -98,13 +148,13 @@ function WebGPUComponent() {
             format: 'depth24plus-stencil8',
             usage: GPUTextureUsage.RENDER_ATTACHMENT | GPUTextureUsage.COPY_SRC
         };
-
-        const pipeline = device.createRenderPipeline({
+        const pipelineLayout: GPUAutoLayoutMode = "auto"
+        const pipelineDesc: GPURenderPipelineDescriptor = {
             vertex: {
                 module: vertModule,
                 entryPoint: 'main',
             },
-
+    
             fragment: {
                 module: fragModule,
                 entryPoint: 'main',
@@ -114,11 +164,12 @@ function WebGPUComponent() {
                     }
                 ]
             },
-
             primitive: {
                 topology: 'triangle-list',
-            }
-        })
+            },
+            layout: pipelineLayout
+        }
+        const pipeline = device.createRenderPipeline(pipelineDesc)
 
         // 使用device创建指令编码器
         const commandEncoder = device.createCommandEncoder()
@@ -129,11 +180,12 @@ function WebGPUComponent() {
                     view: textureView,
                     loadValue: {
                         r: 0.0,
-                        g: 0.0,
+                        g: 250.0,
                         b: 0.0,
                         a: 1.0
                     },
-                    storeOp: 'store'
+                    storeOp: 'store',
+                    loadOp: 'load',
                 }
             ]
         }
@@ -146,6 +198,13 @@ function WebGPUComponent() {
         queue.submit([commandEncoder.finish()])
     }
 
+    async function demogpu() {
+        const canvas = document.getElementById('webGPUCanvas') as HTMLCanvasElement;
+        canvas.width = canvas.height = 640;
+        const renderer = new Renderer(canvas);
+        renderer.start();
+    }
+
 
     async function renderTrangle() {
         const canvas: any = document.getElementById('webGPUCanvas')
@@ -155,7 +214,8 @@ function WebGPUComponent() {
         }
 
         const context = canvas.getContext('webgpu')
-
+        const presentationFormat = context.getPreferredFormat(adapter)
+        configContext(canvas, context, device, presentationFormat);
         // 🤔 Create Depth Backing
         const depthTextureDesc: GPUTextureDescriptor = {
             size: [canvas.width, canvas.height, 1],
@@ -167,26 +227,18 @@ function WebGPUComponent() {
         let depthTexture = device.createTexture(depthTextureDesc);
         let depthTextureView = depthTexture.createView();
 
-        // ✋ Declare canvas context image handles
-        let colorTexture = context.getCurrentTexture();
-        let colorTextureView = colorTexture.createView();
-
         // 📈 Position Vertex Buffer Data
         const positions = new Float32Array([
-            1.0, -1.0, 0.0, -1.0, -1.0, 0.0, 0.0, 1.0, 0.0
+            1.0, -1.0, 0.0,
+            -1.0, -1.0, 0.0,
+            0.0, 1.0, 0.0
         ]);
 
         // 🎨 Color Vertex Buffer Data
         const colors = new Float32Array([
-            1.0,
-            0.0,
-            0.0, // 🔴
-            0.0,
-            1.0,
-            0.0, // 🟢
-            0.0,
-            0.0,
-            1.0 // 🔵
+            1.0, 0.0, 0.0, // 🔴
+            0.0, 1.0, 0.0, // 🟢
+            0.0, 0.0, 1.0  // 🔵
         ]);
 
         // 📇 Index Buffer Data
@@ -197,11 +249,8 @@ function WebGPUComponent() {
         let indexBuffer = createBuffer(indices, GPUBufferUsage.INDEX, device);
 
         // ✋ Declare shader module handles        
-        const vsmDesc = { code: TriangleVertexShaderCode };
-        let vertModule = device.createShaderModule(vsmDesc);
-
-        const fsmDesc = { code: TriangleFramentShaderCode };
-        let fragModule = device.createShaderModule(fsmDesc);
+        let vertModule = device.createShaderModule({ code: TriangleVertexShaderCode });
+        let fragModule = device.createShaderModule({ code: TriangleFramentShaderCode });
 
         // 👔 Uniform Data
         const uniformData = new Float32Array([
@@ -221,65 +270,6 @@ function WebGPUComponent() {
 
         // ✋ Declare buffer handles
         let uniformBuffer = createBuffer(uniformData, GPUBufferUsage.UNIFORM | GPUBufferUsage.COPY_DST, device);
-
-        // 👨‍🔧 Create your graphics pipeline...
-
-        // 🧙‍♂️ Then get your implicit pipeline layout:
-        let bindGroupLayout = pipeline.getBindGroupLayout(0);
-
-        // 🗄️ Bind Group
-        // ✍ This would be used when *encoding commands*
-        let uniformBindGroup = device.createBindGroup({
-            layout: bindGroupLayout,
-            entries: [
-                {
-                    binding: 0,
-                    resource: {
-                        buffer: uniformBuffer
-                    }
-                }
-            ]
-        });
-        // ✋ Declare handles
-        let uniformBindGroupLayout: GPUBindGroupLayout = null;
-        let uniformBindGroup: GPUBindGroup = null;
-        let layout: GPUPipelineLayout = null;
-
-        // 📁 Bind Group Layout
-        uniformBindGroupLayout = device.createBindGroupLayout({
-            entries: [
-                {
-                    binding: 0,
-                    visibility: GPUShaderStage.VERTEX,
-                    buffer: {}
-                }
-            ]
-        });
-
-        // 🗄️ Bind Group
-        // ✍ This would be used when *encoding commands*
-        uniformBindGroup = device.createBindGroup({
-            layout: uniformBindGroupLayout,
-            entries: [
-                {
-                    binding: 0,
-                    resource: {
-                        buffer: uniformBuffer
-                    }
-                }
-            ]
-        });
-
-        // 🗂️ Pipeline Layout
-        // 👩‍🔧 This would be used as a member of a GPUPipelineDescriptor when *creating a pipeline*
-        const pipelineLayoutDesc = { bindGroupLayouts: [uniformBindGroupLayout] };
-        layout = device.createPipelineLayout(pipelineLayoutDesc);
-        // ✍ Later when you're encoding commands:
-        passEncoder.setBindGroup(0, uniformBindGroup);
-        // ✋ Declare pipeline handle
-        let pipeline: GPURenderPipeline = null;
-
-        // ⚗️ Graphics Pipeline
 
         // 🔣 Input Assembly
         const positionAttribDesc: GPUVertexAttribute = {
@@ -301,18 +291,14 @@ function WebGPUComponent() {
             attributes: [colorAttribDesc],
             arrayStride: 4 * 3, // sizeof(float) * 3
             stepMode: 'vertex'
-        };
+        };     
 
         // 🌑 Depth
         const depthStencil: GPUDepthStencilState = {
             depthWriteEnabled: true,
             depthCompare: 'less',
             format: 'depth24plus-stencil8'
-        };
-
-        // 🦄 Uniform Data
-        const pipelineLayoutDesc = { bindGroupLayouts: [] };
-        const layout = device.createPipelineLayout(pipelineLayoutDesc);
+        };      
 
         // 🎭 Shader Stages
         const vertex: GPUVertexState = {
@@ -338,7 +324,23 @@ function WebGPUComponent() {
             cullMode: 'none',
             topology: 'triangle-list'
         };
+         // 📁 Bind Group Layout
+         let uniformBindGroupLayout = device.createBindGroupLayout({
+            entries: [
+                {
+                    binding: 0,
+                    visibility: GPUShaderStage.VERTEX,
+                    buffer: {}
+                }
+            ]
+        });
+        // 🗂️ Pipeline Layout
+        // 👩‍🔧 This would be used as a member of a GPUPipelineDescriptor when *creating a pipeline*
+        const pipelineLayoutDesc = { bindGroupLayouts: [uniformBindGroupLayout] };
+        let layout = device.createPipelineLayout(pipelineLayoutDesc);
 
+
+        // 👨‍🔧 Create your graphics pipeline...
         const pipelineDesc: GPURenderPipelineDescriptor = {
             layout,
             vertex,
@@ -347,23 +349,59 @@ function WebGPUComponent() {
             depthStencil
         };
 
-        pipeline = device.createRenderPipeline(pipelineDesc);
+        const pipeline = device.createRenderPipeline(pipelineDesc);
+        // 🧙‍♂️ Then get your implicit pipeline layout:
+        let bindGroupLayout = pipeline.getBindGroupLayout(0);
+
+        // 🗄️ Bind Group
+        // ✍ This would be used when *encoding commands*
+        let bindGroup = device.createBindGroup({
+            layout: bindGroupLayout,
+            entries: [
+                {
+                    binding: 0,
+                    resource: {
+                        buffer: uniformBuffer
+                    }
+                }
+            ]
+        });
        
 
+        // 🗄️ Bind Group
+        // ✍ This would be used when *encoding commands*
+        let uniformBindGroup = device.createBindGroup({
+            layout: uniformBindGroupLayout,
+            entries: [
+                {
+                    binding: 0,
+                    resource: {
+                        buffer: uniformBuffer
+                    }
+                }
+            ]
+        });
+
+      
+      
+        render(context, device, pipeline, queue, null, depthTextureView, positionBuffer, colorBuffer, indexBuffer, canvas, uniformBindGroup)
+
+      
     }
 
 
     // ✍️ Write commands to send to the GPU
-    function encodeCommands() {
+    function encodeCommands(device: GPUDevice, pipeline: any, queue: any, colorTextureView: any, depthTextureView: any, 
+            positionBuffer: any, colorBuffer: any, indexBuffer: any, canvas: any, uniformBindGroup: any) {
         let colorAttachment: GPURenderPassColorAttachment = {
-            view: this.colorTextureView,
+            view: colorTextureView,
             clearValue: { r: 0, g: 0, b: 0, a: 1 },
             loadOp: 'clear',
             storeOp: 'store'
         };
 
         const depthAttachment: GPURenderPassDepthStencilAttachment = {
-            view: this.depthTextureView,
+            view: depthTextureView,
             depthClearValue: 1,
             depthLoadOp: 'clear',
             depthStoreOp: 'store',
@@ -389,20 +427,24 @@ function WebGPUComponent() {
         passEncoder.setIndexBuffer(indexBuffer, 'uint16');
         passEncoder.drawIndexed(3);
         passEncoder.endPass();
-
+        // ✍ Later when you're encoding commands:
+        passEncoder.setBindGroup(0, uniformBindGroup);
         queue.submit([commandEncoder.finish()]);
     };
 
-    function render(context: any) {
+    function render(context: any, device: GPUDevice, pipeline: any, queue: any, colorTextureView: any, depthTextureView: any, 
+        positionBuffer: any, colorBuffer: any, indexBuffer: any, canvas: any, uniformBindGroup: any) {
         // ⏭ Acquire next image from context
         let colorTexture = context.getCurrentTexture();
-        let colorTextureView = colorTexture.createView();
+        colorTextureView = colorTexture.createView();
+        console.log(colorTextureView);
+        
 
         // 📦 Write and submit commands to queue
-        encodeCommands();
+        encodeCommands(device, pipeline, queue, colorTextureView, depthTextureView, positionBuffer, colorBuffer, indexBuffer, canvas, uniformBindGroup);
 
         // ➿ Refresh canvas
-        requestAnimationFrame(() => render(context));
+        requestAnimationFrame(() => render(context, device, pipeline, queue, colorTextureView, depthTextureView, positionBuffer, colorBuffer, indexBuffer, canvas, uniformBindGroup));
     };
 
     // 👋 Helper function for creating GPUBuffer(s) out of Typed Arrays
