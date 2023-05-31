@@ -1,13 +1,12 @@
 import { useEffect } from "react"
-// import "@webgpu/types"
 import FragmentShaderCode from "./wgsl/fragmentModule.wgsl?raw"
 import VertexShaderCode from "./wgsl/vertexModule.wgsl?raw"
-
 import TriangleVertexShaderCode from "./wgsl/triangleVertex.wgsl?raw"
 import TriangleFramentShaderCode from "./wgsl/triangleFrament.wgsl?raw"
 import Renderer from './demoWebGPU';
 import DWebGPU from "./DWebGPU"
-import { PerspectiveCamera, Matrix4, Vector3 } from "three"
+import DWebGPU1 from "./DWebGPU1"
+import { PerspectiveCamera, Matrix4 } from "three"
 
 import "./webgc.css"
 
@@ -16,7 +15,7 @@ function WebGPUComponent() {
         // renderTrangle()
         // demogpu()
         // renderGPU()
-        testGPU()
+        testGPU1()
     }, [])
     return (
         <div className="webgpu-body">
@@ -33,18 +32,17 @@ function WebGPUComponent() {
             -1.0, -1.0, 0.0,
             1.0, -1.0, 0.0
         ]);
+        const triangleVertexColor = new Float32Array( [
+            1.0, 0.0, 0.0, 1.0,
+            0.0, 1.0, 0.0, 1.0,
+            0.0, 0.0, 1.0, 1.0        
+        ] );
 
         // 🎨 Color Vertex Buffer Data
         const colors = new Float32Array([
-            1.0,
-            0.0,
-            0.0, // 🔴
-            0.0,
-            1.0,
-            0.0, // 🟢
-            0.0,
-            0.0,
-            1.0 // 🔵
+            1.0, 0.0, 0.0, // 🔴
+            0.0, 1.0, 0.0, // 🟢
+            0.0, 0.0, 1.0  // 🔵
         ]);
         const triangleMVMatrix = new Matrix4().makeTranslation(-1.5, 0.0, -7.0);
         const triangleIndex = new Uint32Array([0, 1, 2]);
@@ -59,6 +57,147 @@ function WebGPUComponent() {
         dWebGPU.initGPUBuffer(triangleVertex, triangleIndex, mxArray);
         dWebGPU.draw(triangleIndex.length)
         dWebGPU.present()
+    }
+
+    /**
+     * 绘制图形并添加颜色
+     * 1、首先需要设计WGSL，顶点着色器接收位置与颜色，并将颜色返回给片元着色器
+     * 在WGSL文件main函数中@vertex 以及@fragment 分别标识该文件是顶点着色器韩式片元着色器
+     * main函数中参数用@location 指明参数顺序，后边加参数类型；返回值相同，可以定义结构体
+     * 2、
+     */
+    async function testGPU1() {           
+        const backgroundColor = [0, 0, 0.5, 1];     // 背景颜色
+        // 三角形顶点颜色以及顶点顺序
+        const triangleVertex = new Float32Array([
+            -1.0, 0.0, 0.0,   
+            0.0, 1.5, 0.0,    
+            1.0, 0.0, 0.0,  
+        ]);
+        const colors = new Float32Array([
+            1.0, 0.0, 0.0, 1.0, // 🔴
+            0.0, 1.0, 0.0, 1.0, // 🟢
+            0.0, 0.0, 1.0, 1.0, // 🔵
+        ]);
+        const triangleIndex = new Uint32Array([0, 1, 2]);        // 顶点绘制的顺序
+
+        // 正方形顶点、颜色以及顶点顺序
+        const squreVertex = new Float32Array([
+            2.0, 0.0, 0.0,    
+            2.0, 1.0, 0.0,   
+            3.0, 0.0, 0.0,  
+            3.0, 1.0, 0.0,  
+        ])
+         // 🎨 Color Vertex Buffer Data
+        const squreColors = new Float32Array([
+            1.0, 0.0, 0.0, 1.0, // 🔴
+            0.0, 1.0, 0.0, 1.0, // 🟢
+            0.0, 0.0, 1.0, 1.0, // 🔵
+            1.0, 1.0, 0.0, 1.0,         
+        ]);
+        const squreIndex = new Uint32Array([0, 1, 2, 1, 2, 3]);        // 顶点绘制的顺序
+
+        
+        const pyramidVertexPositon = new Float32Array( [
+        
+            // Front face
+            0.0,  1.0,  0.0,
+            -1.0, -1.0,  1.0,
+            1.0, -1.0,  1.0,
+
+            // Right face
+            0.0,  1.0,  0.0,
+            1.0, -1.0,  1.0,
+            1.0, -1.0, -1.0,
+
+            // Back face
+            0.0,  1.0,  0.0,
+            1.0, -1.0, -1.0,
+            -1.0, -1.0, -1.0,
+
+            // Left face
+            0.0,  1.0,  0.0,
+            -1.0, -1.0, -1.0,
+            -1.0, -1.0,  1.0
+
+        ] );
+
+        const pyramidVertexColor = new Float32Array( [
+
+            // Front face
+            1.0, 0.0, 0.0, 1.0,
+            0.0, 1.0, 0.0, 1.0,
+            0.0, 0.0, 1.0, 1.0,
+
+            // Right face
+            1.0, 0.0, 0.0, 1.0,
+            0.0, 0.0, 1.0, 1.0,
+            0.0, 1.0, 0.0, 1.0,
+
+            // Back face
+            1.0, 0.0, 0.0, 1.0,
+            0.0, 1.0, 0.0, 1.0,
+            0.0, 0.0, 1.0, 1.0,
+
+            // Left face
+            1.0, 0.0, 0.0, 1.0,
+            0.0, 0.0, 1.0, 1.0,
+            0.0, 1.0, 0.0, 1.0
+
+        ] );
+
+        const pyramidMVMatrix = new Matrix4();
+
+        let camera = new PerspectiveCamera(45, document.body.clientWidth / document.body.clientHeight, 0.1, 100);
+        let pMatrix = camera.projectionMatrix;
+        
+        let dWebGPU = new DWebGPU1(backgroundColor)
+        await dWebGPU.config("webGPUCanvas")
+        dWebGPU.initRenderPass();
+        dWebGPU.initPipelineMulti(); 
+        let lastTime = performance.now();
+        let anglex = 0.0, angley = 0.0;
+        dWebGPU.render(() => {            
+            let [angle1, angle2, lastTime1] = animate(lastTime);
+            anglex = anglex + angle1;
+            angley = angley + angle2;
+            lastTime = lastTime1;
+            let mxArray = createMxArray(pMatrix, anglex, angley)
+            dWebGPU.initRenderPass();
+            dWebGPU.renderPassEncoder.setPipeline(dWebGPU.renderPipeline)
+            dWebGPU.initGPUBufferMulti(pyramidVertexPositon, pyramidVertexColor, mxArray, triangleIndex);
+            dWebGPU.draw(triangleIndex.length)
+        
+            // dWebGPU.initGPUBufferMulti(squreVertex, squreColors, mxArray, squreIndex);
+            // dWebGPU.draw(squreIndex.length)
+        
+            dWebGPU.present()
+        })
+    }
+
+    /**
+     * 根据
+     * @param lastTime 
+     * @returns 
+     */
+    function animate(lastTime: number) {
+        let timeNow = performance.now();
+        if ( lastTime != 0 ) {
+            let elapsed = timeNow - lastTime;
+            let anglex = ( Math.PI / 180 * 90 * elapsed ) / 1000.0;
+            let angley = ( Math.PI / 180 * 45 * elapsed ) / 1000.0;
+            return [anglex, angley, timeNow]
+        }
+        return [0, timeNow]
+    }
+
+
+    function createMxArray(pMatrix: Matrix4, anglex: number, angley: number) {
+        const triangleMVMatrix = new Matrix4().makeTranslation(0.0, 0.0, -7.0)
+            .multiply( new Matrix4().makeRotationX( anglex ) )
+            .multiply( new Matrix4().makeRotationY( angley ) );
+        let mxArray = new Float32Array(pMatrix.toArray().concat(triangleMVMatrix.toArray()));
+        return mxArray;
     }
 
     /**
