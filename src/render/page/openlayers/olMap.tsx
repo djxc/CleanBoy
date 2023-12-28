@@ -81,7 +81,7 @@ function OLMap() {
     const cogSource = new GeoTIFF({
       sources: [
         {
-          url: 'http://localhost/TCI.tif',
+          url: 'http://172.16.101.136:9000/remote-sensing/remote.sensing.product/TCI.tif' //'http://localhost/TCI.tif',
         },
       ],
     });

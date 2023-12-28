@@ -32,7 +32,7 @@ function WebGLPage() {
   const NumPoints = 5000;
   return (
       <div className="toolbox-page">
-        <div>计算机图形学</div>
+        <div>前端中用到的计算机图形学技术，包括以下几个方面：</div>
         <div className="request-toolbox" onClick={()=>{changePage("/home/webCG/webGL")}}>
             <span>webGL</span>
         </div>

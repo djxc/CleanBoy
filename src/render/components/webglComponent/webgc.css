@@ -6,3 +6,8 @@
 #webGPUCanvas {
     border: solid red 1px;
 }
+
+.webgl-component-container,
+.canvas-component-container {
+    height: 91vh;
+}

@@ -13,6 +13,7 @@ import WebcgRouter from "./WebcgRouter";
 import ToolboxRouter from "./ToolboxRouter";
 import OLMap from "../page/openlayers/olMap";
 import DataStruct from "../page/dataStruct";
+import RedisClient from "../page/redisClient/redisClient";
 
 function HomeRouter() {
   return (
@@ -32,6 +33,7 @@ function HomeRouter() {
         <Route path="/ol" element={<OLMap />}></Route>
         <Route path="/toolbox/*" element={<ToolboxRouter />}></Route>
         <Route path="/datastruct" element={<DataStruct />}></Route>
+        <Route path="/redis" element={<RedisClient />}></Route>
       </Routes>
       <FooterPage />
     </div>

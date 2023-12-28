@@ -1,7 +1,7 @@
 
 function CanvasComponent() {
     return(
-        <div>
+        <div className="canvas-component-container">
            canvas page
         </div>
     )

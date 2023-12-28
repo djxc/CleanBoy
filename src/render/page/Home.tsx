@@ -11,6 +11,7 @@ import WebGLImage from "../asset/webGL.jpeg";
 import OnlineTileImage from "../asset/onlineTile.png";
 import OpenlayerLogo from "../asset/openlayers.png";
 import ToolboxImage from "../asset/toolbox.jpg";
+import RedisImage from "../asset/redis.jpg";
 
 
 function HomePage() {
@@ -118,6 +119,16 @@ function HomePage() {
                     <img src={OpenlayerLogo} />
                     <div className="main-body-menu-title">openlayers</div>
                 </div>
+            </div>
+            <div className="main-body-menu4">
+                <div
+                    className="main-body-menu4-item"
+                    title="常用工具"
+                    onClick={() => changeMap('/home/redis')}
+                >
+                    <img src={RedisImage} />
+                    <div className="main-body-menu-title">Redis</div>
+                </div>              
             </div>
         </div>
     )
