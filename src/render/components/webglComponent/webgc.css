@@ -11,3 +11,9 @@
 .canvas-component-container {
     height: 91vh;
 }
+
+.operate-shapely,
+.operate-image {
+    width: 100vw;
+    height: 30vh;
+}
