@@ -34,6 +34,10 @@ const createWindow = () => {
     console.log(evt);
   })
 
+  ipcMain.on("getGPSFromImage", (evt, args) => {
+    console.log(evt, args);
+  })
+
   MQTT(win.webContents)
   // parseVT()
   soketRequest()

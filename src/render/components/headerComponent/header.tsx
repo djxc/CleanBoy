@@ -6,10 +6,12 @@ import "./header.css";
 
 function HeaderComponent() {
     const navigate = useNavigate();
+    const window_: any = window;
+
     const menu = (
         <Menu>
             <Menu.Item key="1">
-                <a target="_blank" rel="noopener noreferrer">
+                <a target="_blank" rel="noopener noreferrer" onClick={extectLonLatFromImage}>
                     提取照片GPS
                 </a>
             </Menu.Item>
@@ -43,6 +45,11 @@ function HeaderComponent() {
 
     function changeMap(path: string) {
         navigate(path)
+    }
+
+    function extectLonLatFromImage() {
+        console.log("get lon lat");
+        window_.electron.getGPSFromImage("djxc");
     }
 }
 
