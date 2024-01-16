@@ -4,6 +4,7 @@ const { MQClient } = require("./service/mqtt/DMqtt")
 const { DMqttManage } = require("./service/mqtt/DMqttManage");
 const { parseVT } = require('./service/vectorTile/parseVectorTile');
 const { sendMsg } = require('./service/socket/socketRequest');
+const { testGPS } = require("./util/getGPSFromImage")
 
 const dev = true;
 // 如果为开发模式，则GUI为url进行加载渲染
@@ -36,6 +37,7 @@ const createWindow = () => {
 
   ipcMain.on("getGPSFromImage", (evt, args) => {
     console.log(evt, args);
+    testGPS("D:\Data\image", "D:\Data\gps.txt")
   })
 
   MQTT(win.webContents)
