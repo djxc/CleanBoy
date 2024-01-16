@@ -36,8 +36,7 @@ const createWindow = () => {
   })
 
   ipcMain.on("getGPSFromImage", (evt, args) => {
-    console.log(evt, args);
-    testGPS("D:\Data\image", "D:\Data\gps.txt")
+    testGPS("D:\\Data\\image", "D:\\Data\\gps.txt")
   })
 
   MQTT(win.webContents)
