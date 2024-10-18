@@ -10,6 +10,7 @@ window.addEventListener("DOMContentLoaded", () => {
     replaceText(`${dependency}-version`, process.versions[dependency]);
   }
 
+  // 建立主线程与渲染线程之间的连接
   contextBridge.exposeInMainWorld("electron", {
     // 发送消息
     connect: (connectConfig) => {
@@ -20,6 +21,10 @@ window.addEventListener("DOMContentLoaded", () => {
     },
     socketConnect: (sendInfo) => {
       ipcRenderer.send("soketRequest", sendInfo);
+    },
+
+    getGPSFromImage: (image_path) => {
+      ipcRenderer.send("getGPSFromImage", image_path);
     },
 
     // 接收主线程的消息，发给渲染线程

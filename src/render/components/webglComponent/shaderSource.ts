@@ -10,7 +10,10 @@ void main() {
 
     // gl_Position is a special variable a vertex shader
     // is responsible for setting
-    vec2 position_tmp = a_position + u_translation;
+    vec2 rotatedPosition = vec2(
+        a_position.x * u_rotation.y + a_position.y * u_rotation.x,
+        a_position.y * u_rotation.y - a_position.x * u_rotation.x);
+    vec2 position_tmp = rotatedPosition + u_translation;
     gl_Position = vec4(position_tmp  * vec2(1, -1), 0, 1);
 
 }
