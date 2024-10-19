@@ -95,7 +95,7 @@ function CanvasComponent() {
             [-0.3, -1],
         ]
 
-        let second_hand_path = [
+        let minute_hand_path = [
             [-0.3, -1],
             [-0.2, 12],
             [0, 13],
@@ -104,12 +104,23 @@ function CanvasComponent() {
             [-0.3, -1],
         ]
 
+        let second_hand_path = [
+            [-0.1, -1],
+            [-0.1, 12],
+            [0.1, 12],
+            [0.1, -1],
+        ]
+
 
         let clock_size_transformed = scaleTransform(clock_size);
         let clock_position_translated = translateTransform(clock_position, center_offset) as number[];
 
         let hour_hand_path_scaled = scaleTransform(hour_hand_path) as number[][];
         let hour_hand_path_translated = translateTransform(hour_hand_path_scaled, center_offset) as number[][];
+
+        let rotate_minute_hand_path = rotateTransform(minute_hand_path, [0, 0], 45) as number[][];
+        let minute_hand_path_scaled = scaleTransform(rotate_minute_hand_path) as number[][];
+        let minute_hand_path_translated = translateTransform(minute_hand_path_scaled, center_offset) as number[][];
 
         let rotate_second_hand_path = rotateTransform(second_hand_path, [0, 0], 45) as number[][];
         let second_hand_path_scaled = scaleTransform(rotate_second_hand_path) as number[][];
@@ -141,6 +152,19 @@ function CanvasComponent() {
             // 绘制分针
             ctx.beginPath();
             i = 0;
+            for (let point of minute_hand_path_translated) {
+                if (i == 0) {
+                    ctx.moveTo(point[0], point[1]);
+                } else {
+                    ctx.lineTo(point[0], point[1]);
+                }
+                i = i + 1;
+            }
+            ctx.stroke();
+
+             // 绘制秒针
+            ctx.beginPath();
+            i = 0;
             for (let point of second_hand_path_translated) {
                 if (i == 0) {
                     ctx.moveTo(point[0], point[1]);
@@ -152,6 +176,12 @@ function CanvasComponent() {
             ctx.stroke();
         } 
     }
+
+    // TODO 1、绘制秒针；2、让秒针、分针与时针动起来，模拟真实的表运动 
+
+    // TODO 丟勒算法绘制正方体，根据相似三角形进行计算真实正方体坐标的投影坐标
+
+    // TODO 割角测试
 
     return(
         <div className="canvas-component-container">
