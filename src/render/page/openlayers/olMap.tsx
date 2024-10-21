@@ -27,7 +27,8 @@ import { Point } from "ol/geom";
 
 function OLMap() {
   useEffect(() => {
-    initMap();
+    // initMap();
+    cog_demo();
   }, []);
 
   function initMap() {
@@ -304,7 +305,7 @@ function OLMap() {
   }
 
   function cog_demo() {
-    const tif_url = 'http://localhost/2.tif' //'http://172.16.101.136:9000/remote-sensing/remote.sensing.product/TCI.tif'
+    const tif_url = "http://localhost/3_tmp.tif" //'http://skywalker-v3.ktxztech.com:28001/rs_images/server_import_images/58_cog.tiff' //'http://172.16.101.136:9000/remote-sensing/remote.sensing.product/TCI.tif'
     const raster = new TileLayer({
       source: new XYZ({
         crossOrigin: "anonymous",
@@ -327,7 +328,7 @@ function OLMap() {
             view: new View({
               // center: [33.54, 16.74],
               // extent: result.extent,
-              maxZoom: 22,
+              // maxZoom: 22,
               // zoom: 12,
               projection: "EPSG:3857",
             }),
