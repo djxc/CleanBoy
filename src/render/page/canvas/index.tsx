@@ -1,8 +1,6 @@
 import { useEffect } from "react";
 
 function CanvasPage() {
-    const CELL_SIZE = 10;   // 不同设备一个抽象单位对应实际单位大小
-    
     useEffect(() => {
 
     }, [])
@@ -10,6 +8,7 @@ function CanvasPage() {
     return(
         <div>
            CanvasPage
+           <canvas id="djCanvas" width={20} height={20}></canvas>
         </div>
     )
 }
